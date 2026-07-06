@@ -7,137 +7,274 @@ export const Route = createFileRoute("/")({
 const projects = [
   {
     title: "Works",
+    tag: "Open Source",
     year: "2024",
-    role: "Design · Code",
-    stack: "PHP · Web",
-    description: "An evolving collection of small experiments, static sites, and code sketches. Deployed via GitHub Pages.",
+    stack: ["PHP", "Web"],
+    blurb: "A living gallery of web experiments, deployed via GitHub Pages.",
     href: "https://ajiko2505.github.io/Works/",
-    repo: "https://github.com/ajiko2505/Works",
+    tone: "mint",
+    size: "tall",
   },
   {
-    title: "Profile Config",
+    title: "Profile OS",
+    tag: "Identity",
     year: "2024",
-    role: "Identity",
-    stack: "Markdown",
-    description: "The README behind ajiko2505 — a quiet home base on GitHub. Three words: design, code, build.",
+    stack: ["Markdown", "GitHub"],
+    blurb: "The README behind @ajiko2505 — three verbs, one signal.",
     href: "https://github.com/ajiko2505/ajiko2505",
-    repo: "https://github.com/ajiko2505/ajiko2505",
+    tone: "forest",
+    size: "short",
+  },
+  {
+    title: "Interface Sketches",
+    tag: "Ongoing",
+    year: "2025",
+    stack: ["Figma", "React"],
+    blurb: "Weekly UI studies exploring type systems, density, and motion.",
+    href: "https://github.com/ajiko2505",
+    tone: "dark",
+    size: "wide",
+  },
+  {
+    title: "Field Notes",
+    tag: "Writing",
+    year: "2025",
+    stack: ["Essays"],
+    blurb: "Short notes on craft, tools, and the shape of good software.",
+    href: "https://github.com/ajiko2505",
+    tone: "mint-soft",
+    size: "short",
+  },
+  {
+    title: "Component Lab",
+    tag: "System",
+    year: "2026",
+    stack: ["TS", "Tailwind"],
+    blurb: "A private library of considered primitives — buttons that behave.",
+    href: "https://github.com/ajiko2505",
+    tone: "dark",
+    size: "tall",
+  },
+  {
+    title: "Studio Prints",
+    tag: "Print",
+    year: "2025",
+    stack: ["Poster", "Type"],
+    blurb: "Typographic posters — because pixels alone are not enough.",
+    href: "https://github.com/ajiko2505",
+    tone: "forest",
+    size: "short",
   },
 ];
 
-const services = [
-  { n: "01", title: "Design", body: "Interfaces, identity, and layout systems that feel considered rather than decorated." },
-  { n: "02", title: "Code", body: "Front-end engineering with modern React, TypeScript, and a taste for tiny, resilient details." },
-  { n: "03", title: "Build", body: "Turning ideas into shipped things — from static pages to full product surfaces." },
+const capabilities = [
+  { n: "01", t: "Product Design", d: "End-to-end interface work — from raw wireframe to shipped, considered surface." },
+  { n: "02", t: "Front-End Engineering", d: "React, TypeScript, Tailwind. Fast, resilient, accessible by default." },
+  { n: "03", t: "Design Systems", d: "Token-first systems that scale from a single landing page to a full product." },
+  { n: "04", t: "Brand & Identity", d: "Type, mark, and voice — the personality layer that ties everything together." },
 ];
+
+const clients = ["Independent", "Studio", "Startup", "Personal", "Freelance", "Collab"];
+
+function toneClass(tone: string) {
+  switch (tone) {
+    case "mint":
+      return "bg-mint-gradient text-ink";
+    case "mint-soft":
+      return "bg-forest text-mint-glow";
+    case "forest":
+      return "bg-[oklch(0.28_0.05_160)] text-mint-glow";
+    default:
+      return "bg-surface text-foreground";
+  }
+}
+function sizeClass(size: string) {
+  switch (size) {
+    case "tall": return "md:row-span-2";
+    case "wide": return "md:col-span-2";
+    default: return "";
+  }
+}
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* NAV */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/60 border-b border-border/50">
-        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-          <a href="#top" className="text-mono">AF — ajiko2505</a>
-          <nav className="hidden md:flex items-center gap-8 text-mono">
-            <a href="#work" className="hover:text-accent transition-colors">Work</a>
-            <a href="#about" className="hover:text-accent transition-colors">About</a>
-            <a href="#services" className="hover:text-accent transition-colors">Services</a>
-            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between">
+          <a href="#top" className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-mint animate-glow-pulse" />
+            <span className="text-mono">Ajiko&nbsp;Fidelis</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-1 text-mono">
+            {[
+              ["Index", "#work"],
+              ["Studio", "#about"],
+              ["Craft", "#services"],
+              ["Contact", "#contact"],
+            ].map(([label, href]) => (
+              <a key={href} href={href} className="px-4 py-2 rounded-full hover:bg-surface transition">
+                {label}
+              </a>
+            ))}
           </nav>
           <a
             href="https://github.com/ajiko2505"
             target="_blank"
             rel="noreferrer"
-            className="text-mono px-3 py-1.5 border border-border rounded-full hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors"
+            className="text-mono px-4 py-2 rounded-full bg-mint text-ink hover:shadow-mint transition"
           >
-            GitHub ↗
+            Hire me →
           </a>
         </div>
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative pt-32 pb-24 px-6 overflow-hidden">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex items-center gap-3 text-mono text-muted-foreground animate-rise">
-            <span className="inline-block w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Available for select projects · 2026
+      <section id="top" className="relative pt-28 pb-16 px-6 bg-aurora noise">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex flex-wrap items-center gap-4 text-mono text-muted-foreground animate-rise">
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+              Portfolio · MMXXVI
+            </span>
+            <span className="opacity-40">/</span>
+            <span>Designer &amp; Developer</span>
+            <span className="opacity-40">/</span>
+            <span>Remote — Worldwide</span>
           </div>
 
-          <h1 className="text-display mt-8 text-[clamp(3.5rem,12vw,11rem)] animate-rise">
-            Ajiko <span className="italic text-accent">Fidelis</span>
-          </h1>
+          {/* Enormous type block */}
+          <div className="mt-10 animate-rise">
+            <h1 className="text-display text-[clamp(3.5rem,17vw,17rem)]">
+              AJIKO
+            </h1>
+            <div className="flex items-baseline flex-wrap gap-x-6 gap-y-2 -mt-2 md:-mt-6">
+              <span
+                className="text-display text-[clamp(3.5rem,17vw,17rem)]"
+                style={{
+                  WebkitTextStroke: "1px oklch(0.82 0.17 170)",
+                  color: "transparent",
+                }}
+              >
+                FIDELIS
+              </span>
+              <span className="text-mint text-display text-[clamp(2rem,5vw,4rem)] animate-floaty">✽</span>
+            </div>
+          </div>
 
-          <div className="mt-10 grid md:grid-cols-12 gap-6 items-end animate-rise">
-            <p className="md:col-span-7 text-2xl md:text-3xl text-display leading-[1.15] text-foreground/90">
-              I design. I code. I build. A designer &amp; developer making interfaces
-              and small, useful software with intent.
+          <div className="mt-14 grid md:grid-cols-12 gap-8 items-end animate-rise">
+            <p className="md:col-span-6 text-2xl md:text-3xl leading-[1.25] max-w-2xl font-light">
+              Independent designer &amp; developer building interfaces with
+              <span className="text-mint font-medium"> conviction</span>,
+              type with <span className="text-mint font-medium">weight</span>,
+              and software with <span className="text-mint font-medium">edges</span>.
             </p>
-            <div className="md:col-span-5 md:pl-8 md:border-l border-border">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Independent practice working across product design, front-end
-                engineering, and the strange middle where the two meet. Currently
-                exploring craft-driven web work.
-              </p>
-              <div className="mt-6 flex gap-3">
-                <a href="#work" className="text-mono px-4 py-2.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition">
-                  See the work →
-                </a>
-                <a href="#contact" className="text-mono px-4 py-2.5 rounded-full border border-border hover:border-foreground transition">
-                  Get in touch
-                </a>
+            <div className="md:col-span-3">
+              <div className="text-mono text-muted-foreground mb-2">Currently</div>
+              <div className="text-lg">Open for select projects · Q3 2026</div>
+            </div>
+            <div className="md:col-span-3 flex md:justify-end">
+              <div className="flex -space-x-3">
+                <div className="w-14 h-14 rounded-full bg-mint text-ink grid place-items-center text-mono border-2 border-background">03</div>
+                <div className="w-14 h-14 rounded-full bg-forest text-mint-glow grid place-items-center text-mono border-2 border-background">YR</div>
+                <div className="w-14 h-14 rounded-full bg-surface text-foreground grid place-items-center text-mono border-2 border-background">EXP</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Marquee */}
-        <div className="mt-24 border-y border-border py-6 overflow-hidden">
-          <div className="flex gap-16 animate-marquee whitespace-nowrap text-display text-[clamp(2rem,6vw,4.5rem)] text-foreground/40">
+        <div className="mt-24 border-y border-border/70 py-6 overflow-hidden">
+          <div className="flex gap-14 animate-marquee whitespace-nowrap text-display text-[clamp(2.5rem,7vw,6rem)]">
             {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="flex gap-16 shrink-0">
-                <span>Design</span><span className="text-accent">✳</span>
-                <span>Code</span><span className="text-accent">✳</span>
-                <span>Build</span><span className="text-accent">✳</span>
-                <span>Ship</span><span className="text-accent">✳</span>
-                <span className="italic">Repeat</span><span className="text-accent">✳</span>
+              <div key={i} className="flex gap-14 shrink-0 items-center">
+                <span className="text-foreground">DESIGN</span>
+                <span className="text-mint">✽</span>
+                <span
+                  style={{
+                    WebkitTextStroke: "1px oklch(0.97 0.01 160)",
+                    color: "transparent",
+                  }}
+                >
+                  CODE
+                </span>
+                <span className="text-mint">✽</span>
+                <span className="text-foreground">BUILD</span>
+                <span className="text-mint">✽</span>
+                <span
+                  style={{
+                    WebkitTextStroke: "1px oklch(0.82 0.17 170)",
+                    color: "transparent",
+                  }}
+                >
+                  SHIP
+                </span>
+                <span className="text-mint">✽</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* WORK */}
-      <section id="work" className="px-6 py-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex items-baseline justify-between mb-16">
+      {/* WORK — MASONRY */}
+      <section id="work" className="px-6 py-28">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex items-end justify-between mb-14 flex-wrap gap-6">
             <div>
-              <div className="text-mono text-muted-foreground mb-3">§ 01 — Selected Work</div>
-              <h2 className="text-display text-5xl md:text-7xl">Things I've made</h2>
+              <div className="text-mono text-mint mb-4">◆ Index 01 — Selected work</div>
+              <h2 className="text-display text-6xl md:text-8xl max-w-3xl">
+                Things I've made<span className="text-mint">.</span>
+              </h2>
             </div>
-            <a href="https://github.com/ajiko2505?tab=repositories" target="_blank" rel="noreferrer" className="hidden md:inline text-mono text-muted-foreground hover:text-accent">
-              All repos ↗
+            <a
+              href="https://github.com/ajiko2505?tab=repositories"
+              target="_blank"
+              rel="noreferrer"
+              className="text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition"
+            >
+              Full archive ↗
             </a>
           </div>
 
-          <div className="border-t border-border">
-            {projects.map((p) => (
+          {/* Masonry (CSS grid + row spans) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[240px]">
+            {projects.map((p, i) => (
               <a
                 key={p.title}
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group grid grid-cols-12 gap-4 py-8 border-b border-border items-center hover:bg-muted/40 transition-colors px-2 -mx-2"
+                className={`group relative rounded-3xl p-7 md:p-8 border border-border overflow-hidden noise transition-all duration-500 hover:-translate-y-1 hover:shadow-soft flex flex-col justify-between ${toneClass(p.tone)} ${sizeClass(p.size)}`}
               >
-                <div className="col-span-1 text-mono text-muted-foreground">{p.year}</div>
-                <div className="col-span-11 md:col-span-4">
-                  <div className="text-display text-3xl md:text-5xl group-hover:text-accent transition-colors">
-                    {p.title}
-                  </div>
+                {/* Decorative index */}
+                <div className="flex items-start justify-between">
+                  <div className="text-mono opacity-70">{String(i + 1).padStart(2, "0")} · {p.tag}</div>
+                  <div className="w-10 h-10 rounded-full border border-current/30 grid place-items-center opacity-70 group-hover:opacity-100 group-hover:rotate-45 transition">↗</div>
                 </div>
-                <div className="col-span-6 md:col-span-2 text-mono text-muted-foreground">{p.role}</div>
-                <div className="col-span-6 md:col-span-3 text-sm text-foreground/80">{p.description}</div>
-                <div className="col-span-12 md:col-span-2 text-mono text-right text-muted-foreground group-hover:text-accent transition">
-                  Visit ↗
+
+                {/* Big decoration for the tall/wide cards */}
+                {p.size === "tall" && (
+                  <div className="my-6 text-display text-[6rem] leading-none opacity-90">
+                    {p.title.charAt(0)}
+                  </div>
+                )}
+                {p.size === "wide" && (
+                  <div className="my-2 flex items-center gap-4 opacity-90">
+                    <div className="text-display text-6xl md:text-7xl leading-none">◐ ◑ ◒</div>
+                  </div>
+                )}
+
+                <div>
+                  <h3 className="text-display text-3xl md:text-4xl mb-3">{p.title}</h3>
+                  <p className="text-sm leading-relaxed opacity-80 mb-5 max-w-sm">{p.blurb}</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {p.stack.map((s) => (
+                      <span key={s} className="text-mono px-2.5 py-1 rounded-full border border-current/30 opacity-80">
+                        {s}
+                      </span>
+                    ))}
+                    <span className="text-mono ml-auto opacity-70">{p.year}</span>
+                  </div>
                 </div>
               </a>
             ))}
@@ -146,85 +283,151 @@ function Index() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="px-6 py-32 bg-muted/30">
-        <div className="mx-auto max-w-7xl grid md:grid-cols-12 gap-12">
-          <div className="md:col-span-4">
-            <div className="text-mono text-muted-foreground mb-3">§ 02 — About</div>
-            <div className="sticky top-24">
-              <div className="aspect-square rounded-2xl overflow-hidden border border-border bg-surface">
+      <section id="about" className="px-6 py-28 bg-surface/40 noise">
+        <div className="mx-auto max-w-[1400px] grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-5">
+            <div className="text-mono text-mint mb-4">◆ Index 02 — Studio</div>
+            <div className="sticky top-24 space-y-6">
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-border">
                 <img
                   src="https://avatars.githubusercontent.com/u/100570007?v=4"
                   alt="Ajiko Fidelis"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
+                  className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition duration-700"
                 />
+                <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/20 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 flex justify-between items-end">
+                  <div>
+                    <div className="text-mono text-mint">Studio of one</div>
+                    <div className="text-display text-2xl">Ajiko Fidelis</div>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-mint text-ink grid place-items-center animate-glow-pulse">✽</div>
+                </div>
               </div>
-              <div className="mt-4 text-mono text-muted-foreground">Ajiko Fidelis · Independent</div>
+
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  ["03", "Years"],
+                  ["12+", "Projects"],
+                  ["∞", "Iterations"],
+                ].map(([n, l]) => (
+                  <div key={l} className="rounded-2xl border border-border p-4 text-center">
+                    <div className="text-display text-3xl text-mint">{n}</div>
+                    <div className="text-mono text-muted-foreground mt-1">{l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="md:col-span-8 space-y-8">
-            <h2 className="text-display text-4xl md:text-6xl leading-[1.05]">
-              A quiet practice built on three verbs — <span className="italic text-accent">design</span>,{" "}
-              <span className="italic text-accent">code</span>,{" "}
-              <span className="italic text-accent">build</span>.
+          <div className="md:col-span-7 space-y-8">
+            <h2 className="text-display text-5xl md:text-7xl leading-[0.95]">
+              A practice built on <span className="text-mint">three verbs</span> —
+              design, code, build.
             </h2>
-            <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
-              I care about the shape of software: how it reads, how it responds,
-              how much it asks of the person using it. My work sits between
-              interface design and front-end engineering — sketching, prototyping,
-              and shipping in the same afternoon whenever possible.
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-2xl">
+              I design and engineer web software for people who care how it feels
+              to use their thing. My work sits at the seam where interface
+              decisions meet code decisions — where a well-placed border and a
+              well-shaped state reducer are the same act.
             </p>
-            <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
-              Outside of client work I keep a small workshop of experiments on
-              GitHub — most of it small, some of it useful, all of it made by
-              hand.
+            <p className="text-lg md:text-xl text-foreground/70 leading-relaxed max-w-2xl">
+              I work small: mostly alone, sometimes with a tight collaborator,
+              always shipping something real by the end of the week.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-border">
+            <div className="pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                ["Focus", "Product · Web"],
-                ["Tools", "Figma · React · TS"],
-                ["Base", "Remote"],
-                ["Status", "Open to work"],
+                ["Focus", "Product · Web · Brand"],
+                ["Toolkit", "React · TS · Figma"],
+                ["Base", "Remote — Worldwide"],
+                ["Availability", "Q3 2026"],
               ].map(([k, v]) => (
                 <div key={k}>
-                  <div className="text-mono text-muted-foreground">{k}</div>
-                  <div className="mt-1 text-foreground">{v}</div>
+                  <div className="text-mono text-muted-foreground mb-1">{k}</div>
+                  <div className="text-foreground font-medium">{v}</div>
                 </div>
               ))}
+            </div>
+
+            <div className="pt-8">
+              <div className="text-mono text-muted-foreground mb-4">Worked with</div>
+              <div className="flex flex-wrap gap-2">
+                {clients.map((c) => (
+                  <span key={c} className="text-mono px-4 py-2 rounded-full border border-border">
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="px-6 py-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-mono text-muted-foreground mb-3">§ 03 — What I do</div>
-          <h2 className="text-display text-5xl md:text-7xl mb-16">Services</h2>
+      <section id="services" className="px-6 py-28">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="text-mono text-mint mb-4">◆ Index 03 — Craft</div>
+          <h2 className="text-display text-6xl md:text-8xl mb-16 max-w-4xl">
+            What lands on the invoice<span className="text-mint">.</span>
+          </h2>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
-            {services.map((s) => (
-              <div key={s.n} className="bg-background p-10 hover:bg-muted/40 transition-colors group">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-mono text-muted-foreground">{s.n}</span>
-                  <span className="w-10 h-10 rounded-full border border-border grid place-items-center group-hover:bg-accent group-hover:border-accent group-hover:text-accent-foreground transition">↗</span>
+          <div className="grid md:grid-cols-2 gap-5">
+            {capabilities.map((c) => (
+              <div
+                key={c.n}
+                className="group relative rounded-3xl p-8 md:p-10 border border-border bg-surface/50 hover:bg-surface transition overflow-hidden noise"
+              >
+                <div className="flex items-start justify-between mb-10">
+                  <span className="text-mono text-mint">/ {c.n}</span>
+                  <span className="w-12 h-12 rounded-full border border-border grid place-items-center group-hover:bg-mint group-hover:text-ink group-hover:border-mint group-hover:rotate-45 transition-all duration-500">
+                    ↗
+                  </span>
                 </div>
-                <h3 className="text-display text-4xl mb-4">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.body}</p>
+                <h3 className="text-display text-4xl md:text-5xl mb-4">{c.t}</h3>
+                <p className="text-base md:text-lg text-muted-foreground max-w-md leading-relaxed">
+                  {c.d}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* PROCESS STRIP */}
+      <section className="px-6 py-20 border-y border-border bg-aurora">
+        <div className="mx-auto max-w-[1400px] grid md:grid-cols-4 gap-6">
+          {[
+            ["Listen", "Understand the problem behind the ask."],
+            ["Sketch", "Cheap, fast, ugly — until it isn't."],
+            ["Build", "Ship in code, not in mockups."],
+            ["Refine", "Iterate on the real thing, with real users."],
+          ].map(([t, d], i) => (
+            <div key={t as string} className="flex flex-col gap-3">
+              <div className="text-mono text-mint">Step 0{i + 1}</div>
+              <div className="text-display text-3xl">{t}</div>
+              <div className="text-sm text-muted-foreground">{d}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CONTACT */}
-      <section id="contact" className="px-6 py-32 bg-muted/30">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-mono text-muted-foreground mb-3">§ 04 — Contact</div>
-          <h2 className="text-display text-6xl md:text-9xl leading-[0.95]">
-            Let's build <br />
-            <span className="italic text-accent">something good.</span>
+      <section id="contact" className="px-6 py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-aurora opacity-70" />
+        <div className="relative mx-auto max-w-[1400px]">
+          <div className="text-mono text-mint mb-4">◆ Index 04 — Contact</div>
+          <h2 className="text-display text-[clamp(3.5rem,13vw,13rem)] leading-[0.85]">
+            LET'S
+            <br />
+            <span
+              style={{
+                WebkitTextStroke: "1.5px oklch(0.82 0.17 170)",
+                color: "transparent",
+              }}
+            >
+              BUILD
+            </span>{" "}
+            <span className="text-mint">✽</span>
           </h2>
 
           <div className="mt-16 grid md:grid-cols-12 gap-8 items-end">
@@ -233,21 +436,37 @@ function Index() {
                 href="https://github.com/ajiko2505"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-4 text-display text-3xl md:text-5xl hover:text-accent transition-colors"
+                className="group inline-flex items-center gap-4 text-2xl md:text-4xl font-medium hover:text-mint transition"
               >
+                <span className="w-4 h-4 rounded-full bg-mint group-hover:scale-150 transition" />
                 github.com/ajiko2505
-                <span className="text-2xl">↗</span>
+                <span className="opacity-60 group-hover:translate-x-2 transition">↗</span>
               </a>
+              <div className="mt-8 text-lg text-muted-foreground max-w-xl">
+                Best for design + engineering work on web products, brand
+                systems, and small tools that need care.
+              </div>
             </div>
-            <div className="md:col-span-5 grid grid-cols-2 gap-4">
-              <a href="https://github.com/ajiko2505" target="_blank" rel="noreferrer" className="p-6 rounded-xl border border-border hover:border-accent hover:bg-background transition-colors">
-                <div className="text-mono text-muted-foreground mb-2">Code</div>
-                <div className="text-lg">GitHub</div>
-              </a>
-              <a href="https://github.com/ajiko2505?tab=followers" target="_blank" rel="noreferrer" className="p-6 rounded-xl border border-border hover:border-accent hover:bg-background transition-colors">
-                <div className="text-mono text-muted-foreground mb-2">Follow</div>
-                <div className="text-lg">@ajiko2505</div>
-              </a>
+            <div className="md:col-span-5 grid grid-cols-2 gap-3">
+              {[
+                ["Code", "GitHub", "https://github.com/ajiko2505"],
+                ["Repos", "Works", "https://github.com/ajiko2505/Works"],
+                ["Live", "Site", "https://ajiko2505.github.io/Works/"],
+                ["Follow", "@ajiko2505", "https://github.com/ajiko2505"],
+              ].map(([k, v, h]) => (
+                <a
+                  key={v}
+                  href={h}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-5 rounded-2xl border border-border bg-background/40 backdrop-blur hover:bg-mint hover:text-ink hover:border-mint transition group"
+                >
+                  <div className="text-mono opacity-70 mb-2">{k}</div>
+                  <div className="text-lg font-medium flex items-center justify-between">
+                    {v} <span className="opacity-60 group-hover:translate-x-1 transition">→</span>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -255,10 +474,13 @@ function Index() {
 
       {/* FOOTER */}
       <footer className="border-t border-border px-6 py-10">
-        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4 text-mono text-muted-foreground">
-          <div>© 2026 Ajiko Fidelis</div>
-          <div>Design · Code · Build</div>
-          <div>Made by hand</div>
+        <div className="mx-auto max-w-[1400px] flex flex-col md:flex-row items-center justify-between gap-4 text-mono text-muted-foreground">
+          <div>© 2026 Ajiko Fidelis — All rights, plus a few wrongs</div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+            Designed &amp; coded by hand
+          </div>
+          <a href="#top" className="hover:text-mint transition">Back to top ↑</a>
         </div>
       </footer>
     </div>
