@@ -2,7 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));
 
 @theme inline {
   --font-display: "Archivo Black", "Impact", sans-serif;
@@ -34,15 +34,17 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
 }
 
+/* Dark (default) — Neon Mint */
 :root {
   --radius: 1rem;
-  /* Locked palette: Neon Mint */
-  --ink: oklch(0.19 0.03 245);            /* #0d1b2a */
-  --forest: oklch(0.35 0.07 155);         /* #1b4332 */
-  --mint: oklch(0.82 0.17 170);           /* #2dd4a8 */
-  --mint-glow: oklch(0.92 0.18 165);      /* #73ffb8 */
+  --ink: oklch(0.19 0.03 245);
+  --forest: oklch(0.35 0.07 155);
+  --mint: oklch(0.82 0.17 170);
+  --mint-glow: oklch(0.92 0.18 165);
 
   --background: var(--ink);
   --foreground: oklch(0.97 0.01 160);
@@ -58,6 +60,8 @@
   --card: var(--surface);
   --card-foreground: var(--foreground);
   --ring: var(--mint);
+  --input: oklch(0.28 0.028 240);
+  --destructive: oklch(0.62 0.22 25);
 
   --gradient-aurora: radial-gradient(60% 60% at 20% 10%, oklch(0.35 0.07 155 / 0.55), transparent 60%),
                      radial-gradient(50% 50% at 90% 20%, oklch(0.82 0.17 170 / 0.25), transparent 60%),
@@ -65,6 +69,34 @@
   --gradient-mint: linear-gradient(135deg, var(--mint), var(--mint-glow));
   --shadow-mint: 0 20px 60px -20px oklch(0.82 0.17 170 / 0.5);
   --shadow-soft: 0 30px 80px -30px oklch(0 0 0 / 0.7);
+}
+
+/* Light theme — Paper & Mint */
+.light {
+  --background: oklch(0.98 0.005 160);
+  --foreground: oklch(0.16 0.02 240);
+  --surface: oklch(0.96 0.008 160);
+  --surface-2: oklch(0.93 0.012 160);
+  --muted: oklch(0.94 0.01 160);
+  --muted-foreground: oklch(0.42 0.02 220);
+  --border: oklch(0.16 0.02 240 / 0.14);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.02 240);
+  --input: oklch(0.94 0.01 160);
+  --mint: oklch(0.62 0.16 168);
+  --mint-glow: oklch(0.78 0.17 165);
+  --accent: var(--mint);
+  --accent-foreground: oklch(1 0 0);
+  --primary: var(--mint);
+  --primary-foreground: oklch(1 0 0);
+  --ring: var(--mint);
+  --ink: oklch(0.16 0.02 240);
+
+  --gradient-aurora: radial-gradient(60% 60% at 20% 10%, oklch(0.62 0.16 168 / 0.15), transparent 60%),
+                     radial-gradient(50% 50% at 90% 20%, oklch(0.78 0.17 165 / 0.18), transparent 60%),
+                     radial-gradient(60% 60% at 60% 100%, oklch(0.62 0.16 168 / 0.12), transparent 60%);
+  --shadow-mint: 0 20px 60px -20px oklch(0.62 0.16 168 / 0.35);
+  --shadow-soft: 0 30px 80px -30px oklch(0 0 0 / 0.15);
 }
 
 @layer base {
@@ -76,6 +108,7 @@
     font-family: var(--font-sans);
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
@@ -86,7 +119,10 @@
   }
   ::selection {
     background: var(--mint);
-    color: var(--ink);
+    color: var(--accent-foreground);
+  }
+  input, textarea {
+    font-family: inherit;
   }
 }
 
@@ -129,10 +165,11 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.3;
     mix-blend-mode: overlay;
-    background-image: radial-gradient(oklch(1 0 0 / 0.06) 1px, transparent 1px);
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
     background-size: 3px 3px;
+    color: oklch(1 0 0 / 0.1);
   }
 }
 
@@ -166,8 +203,4 @@
 }
 @utility animate-glow-pulse {
   animation: glow-pulse 2.4s ease-out infinite;
-}
-
-@utility mask-fade-b {
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
