@@ -431,39 +431,63 @@ function Index() {
           </h2>
 
           <div className="mt-16 grid md:grid-cols-12 gap-8 items-end">
-            <div className="md:col-span-7">
+            <div className="md:col-span-6">
+              <div className="text-mono text-muted-foreground mb-3">Fastest reply</div>
               <a
-                href="https://github.com/ajiko2505"
+                href="https://wa.me/2348155866150"
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center gap-4 text-2xl md:text-4xl font-medium hover:text-mint transition"
               >
                 <span className="w-4 h-4 rounded-full bg-mint group-hover:scale-150 transition" />
-                github.com/ajiko2505
+                +234 815 586 6150
                 <span className="opacity-60 group-hover:translate-x-2 transition">↗</span>
               </a>
-              <div className="mt-8 text-lg text-muted-foreground max-w-xl">
+              <div className="mt-6 text-lg text-muted-foreground max-w-xl">
                 Best for design + engineering work on web products, brand
-                systems, and small tools that need care.
+                systems, and small tools that need care. Send a note — I read
+                every message.
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="https://wa.me/2348155866150"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-mono px-5 py-3 rounded-full bg-mint text-ink hover:shadow-mint transition"
+                >
+                  Message on WhatsApp →
+                </a>
+                <a
+                  href="https://linkedin.com/in/ajiko001"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition"
+                >
+                  Book a call ↗
+                </a>
               </div>
             </div>
-            <div className="md:col-span-5 grid grid-cols-2 gap-3">
+            <div className="md:col-span-6 grid grid-cols-2 gap-3">
               {[
-                ["Code", "GitHub", "https://github.com/ajiko2505"],
-                ["Repos", "Works", "https://github.com/ajiko2505/Works"],
-                ["Live", "Site", "https://ajiko2505.github.io/Works/"],
-                ["Follow", "@ajiko2505", "https://github.com/ajiko2505"],
-              ].map(([k, v, h]) => (
+                ["Chat", "WhatsApp", "+234 815 586 6150", "https://wa.me/2348155866150"],
+                ["Network", "LinkedIn", "in/ajiko001", "https://linkedin.com/in/ajiko001"],
+                ["Follow", "Instagram", "@fidelis.ajiko", "https://instagram.com/fidelis.ajiko"],
+                ["Code", "GitHub", "@ajiko2505", "https://github.com/ajiko2505"],
+              ].map(([k, v, sub, h]) => (
                 <a
                   key={v}
                   href={h}
                   target="_blank"
                   rel="noreferrer"
-                  className="p-5 rounded-2xl border border-border bg-background/40 backdrop-blur hover:bg-mint hover:text-ink hover:border-mint transition group"
+                  className="p-5 rounded-2xl border border-border bg-background/50 backdrop-blur hover:bg-mint hover:text-ink hover:border-mint transition group flex flex-col gap-3 min-h-[130px] justify-between"
                 >
-                  <div className="text-mono opacity-70 mb-2">{k}</div>
-                  <div className="text-lg font-medium flex items-center justify-between">
-                    {v} <span className="opacity-60 group-hover:translate-x-1 transition">→</span>
+                  <div className="flex items-start justify-between">
+                    <div className="text-mono opacity-70">{k}</div>
+                    <span className="opacity-60 group-hover:translate-x-1 group-hover:-translate-y-1 transition">↗</span>
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold">{v}</div>
+                    <div className="text-mono opacity-70 mt-1">{sub}</div>
                   </div>
                 </a>
               ))}
@@ -473,14 +497,37 @@ function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-border px-6 py-10">
-        <div className="mx-auto max-w-[1400px] flex flex-col md:flex-row items-center justify-between gap-4 text-mono text-muted-foreground">
-          <div>© 2026 Ajiko Fidelis — All rights, plus a few wrongs</div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
-            Designed &amp; coded by hand
+      <footer className="border-t border-border px-6 py-12">
+        <div className="mx-auto max-w-[1400px] grid gap-8 md:grid-cols-3 items-start">
+          <div>
+            <div className="flex items-center gap-2.5 mb-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-mint animate-glow-pulse" />
+              <span className="text-mono">Ajiko Fidelis · Studio</span>
+            </div>
+            <p className="text-sm text-muted-foreground max-w-xs">
+              Independent design &amp; engineering practice. Building on the web, from Nigeria — for the world.
+            </p>
           </div>
-          <a href="#top" className="hover:text-mint transition">Back to top ↑</a>
+          <div>
+            <div className="text-mono text-muted-foreground mb-3">Elsewhere</div>
+            <ul className="space-y-2 text-sm">
+              <li><a href="https://wa.me/2348155866150" target="_blank" rel="noreferrer" className="hover:text-mint transition">WhatsApp — +234 815 586 6150</a></li>
+              <li><a href="https://linkedin.com/in/ajiko001" target="_blank" rel="noreferrer" className="hover:text-mint transition">LinkedIn — in/ajiko001</a></li>
+              <li><a href="https://instagram.com/fidelis.ajiko" target="_blank" rel="noreferrer" className="hover:text-mint transition">Instagram — @fidelis.ajiko</a></li>
+              <li><a href="https://github.com/ajiko2505" target="_blank" rel="noreferrer" className="hover:text-mint transition">GitHub — @ajiko2505</a></li>
+            </ul>
+          </div>
+          <div className="md:text-right">
+            <div className="text-mono text-muted-foreground mb-3">Colophon</div>
+            <p className="text-sm text-muted-foreground">
+              Set in Archivo Black &amp; Hind. Built with React, TanStack, and Tailwind. Designed &amp; coded by hand.
+            </p>
+            <a href="#top" className="inline-flex mt-4 text-mono hover:text-mint transition">Back to top ↑</a>
+          </div>
+        </div>
+        <div className="mx-auto max-w-[1400px] mt-10 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-3 text-mono text-muted-foreground">
+          <div>© 2026 Ajiko Fidelis — All rights, plus a few wrongs</div>
+          <div>Design · Code · Build</div>
         </div>
       </footer>
     </div>
