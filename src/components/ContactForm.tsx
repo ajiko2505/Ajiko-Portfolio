@@ -1,0 +1,175 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { trackEvent } from "@/lib/analytics";
+
+const schema = z.object({
+  name: z.string().trim().min(2, "Name is too short").max(80, "Keep it under 80 characters"),
+  email: z.string().trim().email("Enter a valid email").max(160),
+  topic: z.enum(["project", "collab", "advice", "other"]),
+  budget: z.enum(["<2k", "2-5k", "5-15k", "15k+", "unsure"]),
+  message: z.string().trim().min(10, "Tell me a bit more").max(1000, "Keep it under 1000 characters"),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+const WHATSAPP = "2348155866150";
+
+export function ContactForm() {
+  const [sent, setSent] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { topic: "project", budget: "unsure" },
+  });
+
+  const messageLen = (watch("message") ?? "").length;
+
+  const onSubmit = handleSubmit(async (values) => {
+    const body = [
+      `New enquiry from ${values.name} (${values.email})`,
+      `Topic: ${values.topic}  ·  Budget: ${values.budget}`,
+      "",
+      values.message,
+    ].join("\n");
+
+    const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(body)}`;
+    trackEvent("contact_submit", { topic: values.topic, budget: values.budget });
+    if (typeof window !== "undefined") window.open(url, "_blank", "noopener,noreferrer");
+    setSent(true);
+    reset({ ...values, message: "" });
+  });
+
+  if (sent) {
+    return (
+      <div className="rounded-3xl border border-border bg-surface/60 p-8 md:p-12 text-center">
+        <div className="text-mono text-mint mb-4">◆ Message queued</div>
+        <h3 className="text-display text-4xl mb-3">Talk soon.</h3>
+        <p className="text-muted-foreground max-w-md mx-auto">
+          I opened a WhatsApp window with your note — hit send there and I'll reply within one working day.
+        </p>
+        <button
+          onClick={() => setSent(false)}
+          className="mt-6 text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition"
+        >
+          Send another →
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="rounded-3xl border border-border bg-surface/60 p-6 md:p-10 space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Field label="Your name" error={errors.name?.message}>
+          <input
+            {...register("name")}
+            placeholder="Ada Lovelace"
+            className="input"
+            autoComplete="name"
+            maxLength={80}
+          />
+        </Field>
+        <Field label="Email" error={errors.email?.message}>
+          <input
+            {...register("email")}
+            placeholder="you@studio.com"
+            type="email"
+            className="input"
+            autoComplete="email"
+            maxLength={160}
+          />
+        </Field>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Field label="What's this about?" error={errors.topic?.message}>
+          <select {...register("topic")} className="input">
+            <option value="project">A new project</option>
+            <option value="collab">Collaboration</option>
+            <option value="advice">Design review / advice</option>
+            <option value="other">Something else</option>
+          </select>
+        </Field>
+        <Field label="Rough budget" error={errors.budget?.message}>
+          <select {...register("budget")} className="input">
+            <option value="unsure">Not sure yet</option>
+            <option value="<2k">Under $2k</option>
+            <option value="2-5k">$2k — $5k</option>
+            <option value="5-15k">$5k — $15k</option>
+            <option value="15k+">$15k+</option>
+          </select>
+        </Field>
+      </div>
+
+      <Field label="The details" error={errors.message?.message}>
+        <textarea
+          {...register("message")}
+          rows={5}
+          maxLength={1000}
+          placeholder="Tell me about the thing you're building, when you need it, and how you found me."
+          className="input resize-none"
+        />
+        <div className="text-mono text-muted-foreground mt-1 text-right">
+          {messageLen}/1000
+        </div>
+      </Field>
+
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p className="text-mono text-muted-foreground">
+          Sends via WhatsApp · No data stored
+        </p>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="text-mono px-6 py-3 rounded-full bg-mint text-accent-foreground hover:shadow-mint transition disabled:opacity-50"
+        >
+          {isSubmitting ? "Sending…" : "Send message →"}
+        </button>
+      </div>
+
+      <style>{`
+        .input {
+          width: 100%;
+          background: var(--input);
+          color: var(--foreground);
+          border: 1px solid var(--border);
+          border-radius: 0.9rem;
+          padding: 0.85rem 1rem;
+          font-size: 1rem;
+          outline: none;
+          transition: border-color .2s, box-shadow .2s;
+        }
+        .input:focus {
+          border-color: var(--mint);
+          box-shadow: 0 0 0 3px oklch(from var(--mint) l c h / 0.25);
+        }
+        .input::placeholder { color: var(--muted-foreground); opacity: 0.7; }
+      `}</style>
+    </form>
+  );
+}
+
+function Field({
+  label,
+  error,
+  children,
+}: {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <div className="text-mono text-muted-foreground mb-2">{label}</div>
+      {children}
+      {error && <div className="text-mono text-destructive mt-1.5">{error}</div>}
+    </label>
+  );
+}
