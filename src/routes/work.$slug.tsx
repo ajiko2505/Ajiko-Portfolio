@@ -77,7 +77,7 @@ function CaseStudy() {
             <span className="text-mono truncate">Ajiko&nbsp;Fidelis</span>
           </Link>
           <div className="flex items-center gap-2">
-            <Link to="/" className="text-mono px-4 py-2 rounded-full hover:bg-surface transition hidden sm:inline">
+            <Link to="/work" className="text-mono px-4 py-2 rounded-full hover:bg-surface transition hidden sm:inline">
               ← All work
             </Link>
             <ThemeToggle />
