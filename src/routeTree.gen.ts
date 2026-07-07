@@ -10,51 +10,116 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
+import { Route as SiteWorkRouteImport } from './routes/_site.work'
+import { Route as SiteServicesRouteImport } from './routes/_site.services'
+import { Route as SiteContactRouteImport } from './routes/_site.contact'
+import { Route as SiteAboutRouteImport } from './routes/_site.about'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SiteRoute,
 } as any)
 const WorkSlugRoute = WorkSlugRouteImport.update({
   id: '/work/$slug',
   path: '/work/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteWorkRoute = SiteWorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteServicesRoute = SiteServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteContactRoute = SiteContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAboutRoute = SiteAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SiteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/services': typeof SiteServicesRoute
+  '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/services': typeof SiteServicesRoute
+  '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
+  '/': typeof SiteIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_site': typeof SiteRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_site/about': typeof SiteAboutRoute
+  '/_site/contact': typeof SiteContactRoute
+  '/_site/services': typeof SiteServicesRoute
+  '/_site/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
+  '/_site/': typeof SiteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/work/$slug'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/work'
+    | '/work/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/work/$slug'
-  id: '__root__' | '/' | '/sitemap.xml' | '/work/$slug'
+  to:
+    | '/sitemap.xml'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/work'
+    | '/work/$slug'
+    | '/'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/sitemap.xml'
+    | '/_site/about'
+    | '/_site/contact'
+    | '/_site/services'
+    | '/_site/work'
+    | '/work/$slug'
+    | '/_site/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  SiteRoute: typeof SiteRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WorkSlugRoute: typeof WorkSlugRoute
 }
@@ -68,12 +133,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/work/$slug': {
       id: '/work/$slug'
@@ -82,11 +154,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_site/work': {
+      id: '/_site/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof SiteWorkRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/services': {
+      id: '/_site/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof SiteServicesRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/contact': {
+      id: '/_site/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/about': {
+      id: '/_site/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRoute
+    }
   }
 }
 
+interface SiteRouteChildren {
+  SiteAboutRoute: typeof SiteAboutRoute
+  SiteContactRoute: typeof SiteContactRoute
+  SiteServicesRoute: typeof SiteServicesRoute
+  SiteWorkRoute: typeof SiteWorkRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteAboutRoute: SiteAboutRoute,
+  SiteContactRoute: SiteContactRoute,
+  SiteServicesRoute: SiteServicesRoute,
+  SiteWorkRoute: SiteWorkRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  SiteRoute: SiteRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WorkSlugRoute: WorkSlugRoute,
 }

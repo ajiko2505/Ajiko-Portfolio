@@ -77,7 +77,7 @@ function CaseStudy() {
             <span className="text-mono truncate">Ajiko&nbsp;Fidelis</span>
           </Link>
           <div className="flex items-center gap-2">
-            <Link to="/" className="text-mono px-4 py-2 rounded-full hover:bg-surface transition hidden sm:inline">
+            <Link to="/work" className="text-mono px-4 py-2 rounded-full hover:bg-surface transition hidden sm:inline">
               ← All work
             </Link>
             <ThemeToggle />
@@ -89,9 +89,9 @@ function CaseStudy() {
       <section className="pt-32 pb-16 px-6 bg-aurora noise">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex items-center gap-3 text-mono text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-mint">Index</Link>
+            <Link to="/" className="hover:text-mint">Home</Link>
             <span className="opacity-40">/</span>
-            <span>Work</span>
+            <Link to="/work" className="hover:text-mint">Work</Link>
             <span className="opacity-40">/</span>
             <span className="text-mint">{project.tag}</span>
           </div>
