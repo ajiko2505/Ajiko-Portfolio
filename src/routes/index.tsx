@@ -426,6 +426,7 @@ function Index() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="border-t border-border px-6 py-12">
