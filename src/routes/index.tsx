@@ -76,6 +76,12 @@ function sizeClass(size: string) {
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-full focus:bg-mint focus:text-accent-foreground focus:text-mono focus:shadow-mint"
+      >
+        Skip to content
+      </a>
       {/* NAV */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
         <div className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between gap-3">
