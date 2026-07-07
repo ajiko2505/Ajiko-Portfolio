@@ -89,9 +89,9 @@ function CaseStudy() {
       <section className="pt-32 pb-16 px-6 bg-aurora noise">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex items-center gap-3 text-mono text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-mint">Index</Link>
+            <Link to="/" className="hover:text-mint">Home</Link>
             <span className="opacity-40">/</span>
-            <span>Work</span>
+            <Link to="/work" className="hover:text-mint">Work</Link>
             <span className="opacity-40">/</span>
             <span className="text-mint">{project.tag}</span>
           </div>
