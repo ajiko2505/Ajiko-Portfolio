@@ -4,8 +4,44 @@ import { ContactForm } from "@/components/ContactForm";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
 
+const SITE_URL = "https://ajiko.lovable.app";
+const SITE_TITLE = "Ajiko Fidelis — Independent Designer & Developer";
+const SITE_DESC =
+  "Portfolio of Ajiko Fidelis — independent designer and front-end developer building considered interfaces, design systems, and shipped web software.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESC },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESC },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Ajiko Fidelis",
+          url: SITE_URL,
+          jobTitle: "Designer & Developer",
+          image: "https://avatars.githubusercontent.com/u/100570007?v=4",
+          sameAs: [
+            "https://github.com/ajiko2505",
+            "https://linkedin.com/in/ajiko001",
+            "https://instagram.com/fidelis.ajiko",
+          ],
+        }),
+      },
+    ],
+  }),
 });
 
 const capabilities = [
@@ -40,6 +76,12 @@ function sizeClass(size: string) {
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-full focus:bg-mint focus:text-accent-foreground focus:text-mono focus:shadow-mint"
+      >
+        Skip to content
+      </a>
       {/* NAV */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
         <div className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between gap-3">
@@ -47,7 +89,7 @@ function Index() {
             <span className="w-2.5 h-2.5 rounded-full bg-mint animate-glow-pulse shrink-0" />
             <span className="text-mono truncate">Ajiko&nbsp;Fidelis</span>
           </a>
-          <nav className="hidden md:flex items-center gap-1 text-mono">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-1 text-mono">
             {[
               ["Index", "#work"],
               ["Studio", "#about"],
@@ -72,6 +114,7 @@ function Index() {
         </div>
       </header>
 
+      <main id="main">
       {/* HERO */}
       <section id="top" className="relative pt-28 pb-16 px-6 bg-aurora noise">
         <div className="mx-auto max-w-[1400px]">
@@ -383,6 +426,7 @@ function Index() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="border-t border-border px-6 py-12">

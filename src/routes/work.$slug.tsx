@@ -10,16 +10,36 @@ export const Route = createFileRoute("/work/$slug")({
     if (!project) throw notFound();
     return { slug: project.slug };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const p = loaderData ? getProject(loaderData.slug) : undefined;
+    const url = `https://ajiko.lovable.app/work/${params.slug}`;
     if (!p) return { meta: [{ title: "Case study — Ajiko Fidelis" }] };
+    const title = `${p.title} — Ajiko Fidelis`;
     return {
       meta: [
-        { title: `${p.title} — Ajiko Fidelis` },
+        { title },
         { name: "description", content: p.blurb },
-        { property: "og:title", content: `${p.title} — Ajiko Fidelis` },
+        { property: "og:title", content: title },
         { property: "og:description", content: p.blurb },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: p.blurb },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: p.title,
+            description: p.blurb,
+            url,
+            dateCreated: p.year,
+            author: { "@type": "Person", name: "Ajiko Fidelis" },
+          }),
+        },
       ],
     };
   },
