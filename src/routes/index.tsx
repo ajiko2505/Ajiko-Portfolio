@@ -4,8 +4,44 @@ import { ContactForm } from "@/components/ContactForm";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
 
+const SITE_URL = "https://ajiko.lovable.app";
+const SITE_TITLE = "Ajiko Fidelis — Independent Designer & Developer";
+const SITE_DESC =
+  "Portfolio of Ajiko Fidelis — independent designer and front-end developer building considered interfaces, design systems, and shipped web software.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESC },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESC },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Ajiko Fidelis",
+          url: SITE_URL,
+          jobTitle: "Designer & Developer",
+          image: "https://avatars.githubusercontent.com/u/100570007?v=4",
+          sameAs: [
+            "https://github.com/ajiko2505",
+            "https://linkedin.com/in/ajiko001",
+            "https://instagram.com/fidelis.ajiko",
+          ],
+        }),
+      },
+    ],
+  }),
 });
 
 const capabilities = [
