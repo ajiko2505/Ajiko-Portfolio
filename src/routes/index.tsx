@@ -114,6 +114,7 @@ function Index() {
         </div>
       </header>
 
+      <main id="main">
       {/* HERO */}
       <section id="top" className="relative pt-28 pb-16 px-6 bg-aurora noise">
         <div className="mx-auto max-w-[1400px]">
