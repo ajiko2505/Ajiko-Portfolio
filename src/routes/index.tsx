@@ -89,7 +89,7 @@ function Index() {
             <span className="w-2.5 h-2.5 rounded-full bg-mint animate-glow-pulse shrink-0" />
             <span className="text-mono truncate">Ajiko&nbsp;Fidelis</span>
           </a>
-          <nav className="hidden md:flex items-center gap-1 text-mono">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-1 text-mono">
             {[
               ["Index", "#work"],
               ["Studio", "#about"],
