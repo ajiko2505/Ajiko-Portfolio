@@ -36,7 +36,7 @@ function SiteLayout() {
               <Link
                 key={item.to}
                 to={item.to}
-                activeOptions={{ exact: item.exact ?? false }}
+                activeOptions={{ exact: "exact" in item ? item.exact : false }}
                 activeProps={{ "aria-current": "page", className: "text-mint bg-surface" }}
                 className="px-4 py-2 rounded-full hover:bg-surface transition"
               >
