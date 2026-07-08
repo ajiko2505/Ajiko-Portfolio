@@ -171,8 +171,7 @@ function ProjectsIndexSection() {
           <Link
             to="/work"
             onClick={() => trackEvent("cta_work", { from: "projects_index" })}
-            className="inline-flex items-center gap-2 text-mono px-8 py-4 rounded-full bg-accent-foreground text-accent-foreground hover:brightness-110 transition min-h-11"
-            style={{ backgroundColor: "oklch(0.18 0.04 160)" }}
+            className="inline-flex items-center gap-2 text-mono px-8 py-4 rounded-full bg-foreground text-background hover:shadow-soft transition min-h-11"
           >
             Explore all work →
           </Link>
@@ -309,6 +308,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+      <ProjectsIndexSection />
 
       {/* CTA STRIP */}
       <section className="px-6 py-20 border-y border-border bg-aurora relative overflow-hidden">
