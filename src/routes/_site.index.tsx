@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/lib/projects";
 import { trackEvent } from "@/lib/analytics";
@@ -49,6 +50,135 @@ function toneClass(tone: string) {
     case "forest": return "bg-[oklch(0.28_0.05_160)] text-mint-glow";
     default: return "bg-surface text-foreground";
   }
+}
+
+type SortKey = "year" | "tag" | "title";
+
+function ProjectsIndexSection() {
+  const [sort, setSort] = useState<SortKey>("year");
+
+  const sorted = useMemo(() => {
+    const base = [...projects];
+    switch (sort) {
+      case "year":
+        return base.sort((a, b) => Number(b.year) - Number(a.year));
+      case "tag":
+        return base.sort((a, b) => a.tag.localeCompare(b.tag) || a.title.localeCompare(b.title));
+      case "title":
+        return base.sort((a, b) => a.title.localeCompare(b.title));
+      default:
+        return base;
+    }
+  }, [sort]);
+
+  const tags = useMemo(
+    () => Array.from(new Set(projects.map((p) => p.tag))).sort(),
+    []
+  );
+
+  return (
+    <section className="px-6 py-24" aria-labelledby="projects-index-heading">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div>
+            <div className="text-mono text-mint mb-4">◆ Index</div>
+            <h2 id="projects-index-heading" className="text-display text-4xl sm:text-5xl md:text-7xl max-w-3xl">
+              Projects index<span className="text-mint">.</span>
+            </h2>
+            <p className="mt-4 text-lg text-foreground/80 max-w-xl">
+              Every project, sorted for clarity. Browse by year, category, or title, then dive into the full case studies.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center gap-2 bg-aurora/50 border border-border rounded-full p-1">
+              {(["year", "tag", "title"] as SortKey[]).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setSort(key)}
+                  aria-pressed={sort === key}
+                  className={`px-4 py-2 rounded-full text-mono text-sm transition min-h-9 ${
+                    sort === key
+                      ? "bg-mint text-accent-foreground"
+                      : "text-foreground/70 hover:text-mint"
+                  }`}
+                >
+                  {key === "year" ? "Year" : key === "tag" ? "Category" : "Title"}
+                </button>
+              ))}
+            </div>
+            <span className="text-mono text-sm text-muted-foreground">
+              {sorted.length} entries
+            </span>
+          </div>
+        </div>
+
+        <div className="border border-border rounded-3xl overflow-hidden bg-aurora/20">
+          <div className="hidden md:grid md:grid-cols-12 gap-4 px-6 py-4 text-mono text-sm text-muted-foreground border-b border-border bg-aurora/40">
+            <div className="md:col-span-1">#</div>
+            <div className="md:col-span-4">Project</div>
+            <div className="md:col-span-2">Category</div>
+            <div className="md:col-span-2">Year</div>
+            <div className="md:col-span-3">Stack</div>
+          </div>
+
+          <ul className="divide-y divide-border">
+            {sorted.map((p, i) => (
+              <li key={p.slug}>
+                <Link
+                  to="/work/$slug"
+                  params={{ slug: p.slug }}
+                  onClick={() => trackEvent("project_open", { slug: p.slug, from: "projects_index" })}
+                  className="group grid md:grid-cols-12 gap-4 px-6 py-5 items-center transition hover:bg-aurora/40"
+                >
+                  <span className="md:col-span-1 text-mono text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="md:col-span-4 flex flex-col">
+                    <span className="text-display text-xl md:text-2xl group-hover:text-mint transition">
+                      {p.title}
+                    </span>
+                    <span className="md:hidden text-mono text-sm text-muted-foreground mt-1">
+                      {p.tag} · {p.year}
+                    </span>
+                  </span>
+                  <span className="md:col-span-2 text-mono text-sm">
+                    <span className="inline-flex px-3 py-1 rounded-full border border-border bg-aurora/30">
+                      {p.tag}
+                    </span>
+                  </span>
+                  <span className="md:col-span-2 text-mono text-muted-foreground">{p.year}</span>
+                  <span className="md:col-span-3 flex flex-wrap gap-2">
+                    {p.stack.slice(0, 3).map((s) => (
+                      <span key={s} className="text-mono text-xs px-2.5 py-1 rounded-full border border-border opacity-80">
+                        {s}
+                      </span>
+                    ))}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-8 rounded-3xl bg-mint-gradient text-accent-foreground">
+          <div>
+            <div className="text-mono opacity-80 mb-2">{tags.length} categories · {projects.length} projects</div>
+            <h3 className="text-display text-2xl md:text-3xl">
+              Want the full picture?
+            </h3>
+          </div>
+          <Link
+            to="/work"
+            onClick={() => trackEvent("cta_work", { from: "projects_index" })}
+            className="inline-flex items-center gap-2 text-mono px-8 py-4 rounded-full bg-foreground text-background hover:shadow-soft transition min-h-11"
+          >
+            Explore all work →
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function HomePage() {
@@ -178,6 +308,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+      <ProjectsIndexSection />
 
       {/* CTA STRIP */}
       <section className="px-6 py-20 border-y border-border bg-aurora relative overflow-hidden">
