@@ -2,8 +2,8 @@ import { useState, useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/lib/projects";
 import { trackEvent } from "@/lib/analytics";
+import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
-const SITE_URL = "https://ajiko.lovable.app";
 const TITLE = "Ajiko Fidelis — Independent Designer & Developer";
 const DESC =
   "Portfolio of Ajiko Fidelis — independent designer and front-end developer building considered interfaces, design systems, and shipped web software.";
@@ -18,8 +18,12 @@ export const Route = createFileRoute("/_site/")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:alt", content: "Ajiko Fidelis — designer & developer portfolio" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image:alt", content: "Ajiko Fidelis — designer & developer portfolio" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [

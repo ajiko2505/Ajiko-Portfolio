@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ContactForm } from "@/components/ContactForm";
 import { trackEvent } from "@/lib/analytics";
+import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
-const SITE_URL = "https://ajiko.lovable.app";
 const TITLE = "Contact — Ajiko Fidelis";
 const DESC =
   "Get in touch with Ajiko Fidelis — WhatsApp, LinkedIn, Instagram, or the contact form. Fastest reply within one working day.";
@@ -17,8 +17,12 @@ export const Route = createFileRoute("/_site/contact")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/contact` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:alt", content: "Contact Ajiko Fidelis" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image:alt", content: "Contact Ajiko Fidelis" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),

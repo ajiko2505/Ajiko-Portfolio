@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/lib/projects";
 import { trackEvent } from "@/lib/analytics";
+import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
-const SITE_URL = "https://ajiko.lovable.app";
 const TITLE = "Work — Ajiko Fidelis";
 const DESC =
   "Selected case studies by Ajiko Fidelis — product design, front-end engineering, systems and identity work.";
@@ -17,8 +17,12 @@ export const Route = createFileRoute("/_site/work")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/work` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:alt", content: "Selected work by Ajiko Fidelis" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image:alt", content: "Selected work by Ajiko Fidelis" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/work` }],
   }),
