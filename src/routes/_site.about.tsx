@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
-const SITE_URL = "https://ajiko.lovable.app";
 const TITLE = "About — Ajiko Fidelis";
 const DESC =
   "A studio of one. Ajiko Fidelis is an independent designer and developer building web software with conviction — from Nigeria, for the world.";
@@ -15,8 +15,12 @@ export const Route = createFileRoute("/_site/about")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "profile" },
       { property: "og:url", content: `${SITE_URL}/about` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:alt", content: "About Ajiko Fidelis" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image:alt", content: "About Ajiko Fidelis" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/about` }],
   }),
