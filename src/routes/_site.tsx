@@ -4,6 +4,14 @@ import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/_site")({
   component: SiteLayout,
+  head: () => ({
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(structuredData),
+      },
+    ],
+  }),
 });
 
 const NAV = [
@@ -13,6 +21,53 @@ const NAV = [
   { to: "/services", label: "Craft" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
+const SITE_URL = "https://ajiko.lovable.app";
+const ORG_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": ORG_ID,
+      name: "Ajiko Fidelis Studio",
+      url: SITE_URL,
+      description:
+        "Independent design & engineering practice. Building on the web, from Nigeria — for the world.",
+      sameAs: [
+        "https://github.com/ajiko2505",
+        "https://linkedin.com/in/ajiko001",
+        "https://instagram.com/fidelis.ajiko",
+        "https://wa.me/2348155866150",
+      ],
+      founder: {
+        "@type": "Person",
+        name: "Ajiko Fidelis",
+        url: SITE_URL,
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Business inquiries",
+        telephone: "+234-815-586-6150",
+        url: `${SITE_URL}/contact`,
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      name: "Ajiko Fidelis",
+      url: SITE_URL,
+      description:
+        "I design, I code, I build. Portfolio of Ajiko Fidelis — designer and developer crafting interfaces, systems, and small useful things.",
+      inLanguage: "en",
+      publisher: { "@id": ORG_ID },
+      copyrightHolder: { "@id": ORG_ID },
+    },
+  ],
+};
+
 
 function SiteLayout() {
   return (
