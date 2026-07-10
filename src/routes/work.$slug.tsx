@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getProject, projects } from "@/lib/projects";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
+import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
@@ -12,9 +13,17 @@ export const Route = createFileRoute("/work/$slug")({
   },
   head: ({ loaderData, params }) => {
     const p = loaderData ? getProject(loaderData.slug) : undefined;
-    const url = `https://ajiko.lovable.app/work/${params.slug}`;
-    if (!p) return { meta: [{ title: "Case study — Ajiko Fidelis" }] };
+    const url = `${SITE_URL}/work/${params.slug}`;
+    if (!p) {
+      return {
+        meta: [
+          { title: "Case study — Ajiko Fidelis" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
+    }
     const title = `${p.title} — Ajiko Fidelis`;
+    const imageAlt = `${p.title} — case study by Ajiko Fidelis`;
     return {
       meta: [
         { title },
@@ -23,8 +32,12 @@ export const Route = createFileRoute("/work/$slug")({
         { property: "og:description", content: p.blurb },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
+        { property: "og:image", content: SITE_OG_IMAGE },
+        { property: "og:image:alt", content: imageAlt },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: p.blurb },
+        { name: "twitter:image", content: SITE_OG_IMAGE },
+        { name: "twitter:image:alt", content: imageAlt },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -36,8 +49,9 @@ export const Route = createFileRoute("/work/$slug")({
             name: p.title,
             description: p.blurb,
             url,
+            image: SITE_OG_IMAGE,
             dateCreated: p.year,
-            author: { "@type": "Person", name: "Ajiko Fidelis" },
+            author: { "@type": "Person", name: "Ajiko Fidelis", url: SITE_URL },
           }),
         },
       ],
