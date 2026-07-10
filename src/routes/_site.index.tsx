@@ -39,9 +39,42 @@ export const Route = createFileRoute("/_site/")({
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Projects index — Ajiko Fidelis",
+          description:
+            "Selected projects by Ajiko Fidelis, spanning design systems, interface studies, open-source work, and writing.",
+          numberOfItems: projects.length,
+          itemListOrder: "https://schema.org/ItemListOrderDescending",
+          itemListElement: projects.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${SITE_URL}/work/${p.slug}`,
+            item: {
+              "@type": "CreativeWork",
+              name: p.title,
+              headline: p.title,
+              description: p.blurb,
+              url: `${SITE_URL}/work/${p.slug}`,
+              genre: p.tag,
+              dateCreated: p.year,
+              keywords: p.stack.join(", "),
+              author: {
+                "@type": "Person",
+                name: "Ajiko Fidelis",
+                url: SITE_URL,
+              },
+            },
+          })),
+        }),
+      },
     ],
   }),
 });
+
 
 function toneClass(tone: string) {
   switch (tone) {
