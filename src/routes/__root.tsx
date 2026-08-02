@@ -92,6 +92,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:creator", content: "@ajikofidelis" },
       { name: "twitter:title", content: "Ajiko Fidelis — Designer & Developer" },
       { name: "twitter:description", content: "I design, I code, I build. Portfolio of Ajiko Fidelis — designer and developer crafting interfaces, systems, and small useful things." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e2ef6641-a29f-454b-9464-920eaab46ce9" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e2ef6641-a29f-454b-9464-920eaab46ce9" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
