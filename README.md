@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/home.png" alt="Ajiko Portfolio" width="100%">
+  <img src="public/preview.png" alt="Ajiko Portfolio Hero Banner" width="100%">
 </p>
 
 <h1 align="center">🚀 Ajiko Portfolio</h1>
