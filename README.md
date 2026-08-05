@@ -5,7 +5,7 @@
 <h1 align="center">🚀 Ajiko Portfolio</h1>
 
 <p align="center">
-A modern portfolio built with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Supabase</strong>, showcasing my projects, technical expertise, and professional journey as a Software Engineer.
+A modern, high-performance portfolio showcasing my projects, technical expertise, and passion for building secure, scalable, and user-focused software.
 </p>
 
 <p align="center">
@@ -41,25 +41,52 @@ A modern portfolio built with <strong>React</strong>, <strong>TypeScript</strong
 
 ---
 
+# 📚 Table of Contents
+
+- Overview
+- Project Status
+- Features
+- Project Showcase
+- Tech Stack
+- Architecture
+- Project Structure
+- Installation
+- Live Demo
+- Purpose
+- Roadmap
+- Contributing
+- License
+- Meet the Developer
+
+---
+
 # 📖 Overview
 
-Ajiko Portfolio is a modern, responsive developer portfolio designed to showcase my technical expertise, featured projects, software engineering experience, and professional journey.
+Ajiko Portfolio is a modern, responsive developer portfolio designed to showcase my software engineering journey, technical expertise, and featured projects.
 
-The application serves as a central hub where recruiters, employers, clients, and collaborators can explore my work, discover the technologies I use, and learn more about my approach to building scalable software.
+Built with scalability, performance, accessibility, and maintainability in mind, the application provides recruiters, employers, clients, and collaborators with a seamless way to explore my work and connect with me.
 
-Built with performance, accessibility, responsiveness, and maintainability in mind, the portfolio reflects my commitment to creating clean, reliable, and user-focused digital experiences.
+The project demonstrates my approach to building clean, reliable, and production-ready web applications using modern technologies.
+
+---
+
+# 📌 Project Status
+
+✅ **Actively Maintained**
+
+This portfolio is continuously improved with new projects, performance enhancements, UI refinements, and modern development practices.
 
 ---
 
 # ✨ Features
 
-- ⚡ Fast and optimized performance
-- 📱 Fully responsive across all devices
-- 🎨 Modern and intuitive UI/UX
-- 🌙 Beautiful dark mode experience
+- ⚡ Lightning-fast performance
+- 📱 Fully responsive design
+- 🎨 Modern UI/UX
+- 🌙 Dark mode support
 - 💼 Interactive project showcase
 - 🛠 Technology stack section
-- 📩 Contact and collaboration section
+- 📩 Contact & collaboration section
 - 🚀 Production-ready deployment
 - 🔍 SEO-friendly architecture
 - 🧩 Reusable component architecture
@@ -70,26 +97,26 @@ Built with performance, accessibility, responsiveness, and maintainability in mi
 
 # 🖼 Project Showcase
 
-## 🏠 Home
+## 🏠 Home Page
 
 <p align="center">
-<img src="public/home.png" width="100%">
+<img src="public/home.png" alt="Home Page" width="100%">
 </p>
 
 ---
 
-## 👨‍💻 Studio
+## 🧠 Studio
 
 <p align="center">
-<img src="public/studio.png" width="100%">
+<img src="public/studio.png" alt="Studio Section" width="100%">
 </p>
 
 ---
 
-## 🎨 Craft
+## 🎨 Creative Studio
 
 <p align="center">
-<img src="public/craft.png" width="100%">
+<img src="public/craft.png" alt="Creative Studio" width="100%">
 </p>
 
 ---
@@ -97,43 +124,49 @@ Built with performance, accessibility, responsiveness, and maintainability in mi
 ## 📞 Contact
 
 <p align="center">
-<img src="public/contact.png" width="100%">
+<img src="public/contact.png" alt="Contact Section" width="100%">
 </p>
 
 ---
 
-# 📸 More Screenshots
+# 📸 Additional Screens
 
 <table>
 
 <tr>
+
 <td width="50%">
-<img src="public/admin.png">
+<img src="public/admin.png" alt="Admin Dashboard">
 </td>
 
 <td width="50%">
-<img src="public/partners.png">
+<img src="public/partners.png" alt="Partners Section">
 </td>
+
 </tr>
 
 <tr>
+
 <td width="50%">
-<img src="public/cloud.png">
+<img src="public/cloud.png" alt="Cloud Services">
 </td>
 
 <td width="50%">
-<img src="public/automated.png">
+<img src="public/automated.png" alt="Automation Features">
 </td>
+
 </tr>
 
 <tr>
+
 <td width="50%">
-<img src="public/auto.png">
+<img src="public/auto.png" alt="Automation">
 </td>
 
 <td width="50%">
-<img src="public/co.png">
+<img src="public/co.png" alt="Company Section">
 </td>
+
 </tr>
 
 </table>
@@ -145,23 +178,24 @@ Built with performance, accessibility, responsiveness, and maintainability in mi
 | Category | Technologies |
 |-----------|--------------|
 | Frontend | React, TypeScript, Vite, HTML5, CSS3, Tailwind CSS |
-| Backend | Supabase |
+| Backend & Database | Supabase |
 | Deployment | Vercel |
 | Version Control | Git & GitHub |
-| Development | VS Code, Lovable |
+| Development Tools | VS Code, Lovable |
 
 ---
 
-# 🏗 Architecture
+# 🏗️ Architecture
 
-The application follows a modern component-based architecture with a clear separation of concerns.
+The application follows a modern component-based architecture designed for scalability, maintainability, and performance.
 
-- Reusable UI components
-- Responsive layouts
-- Feature-based project organization
+- Reusable React components
+- Type-safe development with TypeScript
+- Responsive layouts across all devices
+- Modular project structure
 - Supabase backend integration
-- Optimized Vite production builds
-- Scalable and maintainable codebase
+- Optimized production builds using Vite
+- Clean and maintainable codebase
 
 ---
 
@@ -182,7 +216,7 @@ Ajiko-Portfolio/
 
 ---
 
-# ⚙ Installation
+# ⚙️ Installation
 
 Clone the repository
 
@@ -202,13 +236,13 @@ Install dependencies
 npm install
 ```
 
-Run the development server
+Start the development server
 
 ```bash
 npm run dev
 ```
 
-Build for production
+Create a production build
 
 ```bash
 npm run build
@@ -224,42 +258,43 @@ npm run preview
 
 # 🌐 Live Demo
 
-### 🚀 Visit the Portfolio
+### 🚀 Explore the Portfolio
 
-https://ajiko-portfolio.vercel.app
+**Live Website:** https://ajiko-portfolio.vercel.app
 
 ---
 
 # 🎯 Purpose
 
-This portfolio was created to present my work in a professional, accessible, and engaging way.
+This project serves as my professional digital portfolio, providing a central place to showcase my work, technical capabilities, and software engineering experience.
 
-It highlights the technologies I use, the projects I've built, and my approach to designing secure, scalable, and user-focused software solutions.
+It reflects my passion for building secure, scalable, and user-focused applications while demonstrating modern development practices and thoughtful design.
 
 ---
 
 # 📈 Roadmap
 
-- 📚 Technical blog integration
+- 📝 Technical Blog
 - 🌍 Internationalization (i18n)
-- 🔎 Advanced project filtering
-- 📊 Analytics dashboard
-- 📖 Project case studies
-- ⚡ Performance enhancements
-- ♿ Accessibility improvements
+- 📊 Analytics Dashboard
+- 📚 Project Case Studies
+- 🔎 Advanced Project Filtering
+- ⚡ Performance Improvements
+- ♿ Accessibility Enhancements
 - 📱 Progressive Web App (PWA)
+- 🤖 AI-powered Features
 
 ---
 
 # 🤝 Contributing
 
-Contributions, suggestions, and feedback are always welcome.
+Contributions, suggestions, and feedback are welcome.
 
-If you'd like to contribute:
+To contribute:
 
 1. Fork this repository
 
-2. Create a feature branch
+2. Create a new branch
 
 ```bash
 git checkout -b feature/new-feature
@@ -283,28 +318,28 @@ git push origin feature/new-feature
 
 # 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
-# 👨‍💻 About the Author
+# 👋 Meet the Developer
 
 ## Ajiko Fidelis
 
-**Software Engineer | Full-Stack Developer | IT Specialist**
+**Software Engineer • Full-Stack Developer • IT Specialist**
 
-I enjoy building secure, scalable, and user-focused applications that solve real-world problems.
+I enjoy designing and building secure, scalable, and user-focused software that solves real-world problems.
 
-My interests include:
+### Areas of Interest
 
-- Modern Web Development
-- Enterprise Software
-- Cloud Computing
-- Business Automation
-- Software Architecture
-- DevOps
-- Artificial Intelligence
-- Continuous Learning
+- 🌐 Modern Web Development
+- 🏢 Enterprise Software
+- ☁ Cloud Computing
+- 🏗 Software Architecture
+- ⚙ Business Automation
+- 🚀 DevOps
+- 🤖 Artificial Intelligence
+- 📚 Continuous Learning
 
 ---
 
@@ -314,7 +349,7 @@ https://ajiko-portfolio.vercel.app
 
 ### 💼 LinkedIn
 
-https://linkedin.com/in/ajiko001
+https://www.linkedin.com/in/ajiko001
 
 ### 📧 Email
 
@@ -328,18 +363,24 @@ https://github.com/ajiko2505
 
 # ⭐ Support
 
-If you found this project useful or inspiring, consider giving it a ⭐ on GitHub.
+If you found this project interesting or helpful, consider giving it a ⭐ on GitHub.
 
-Your support helps others discover the project and encourages future improvements.
+It helps others discover the project and supports future improvements.
 
 ---
 
 <p align="center">
 
-<strong>Made with ❤️ by Ajiko Fidelis</strong>
+<h3>Thanks for visiting! 👋</h3>
+
+<p>
+If you enjoyed exploring this project, feel free to connect with me, explore my repositories, or collaborate on something exciting.
+</p>
+
+<b>🚀 Always Learning • Always Building • Always Improving</b>
 
 <br><br>
 
-Building secure, scalable, and impactful software—one project at a time.
+Made with ❤️ using React, TypeScript, Vite, Supabase & Vercel.
 
 </p>
