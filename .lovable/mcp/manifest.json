@@ -57,7 +57,7 @@
             "slug": {
               "type": "string",
               "minLength": 1,
-              "description": "Project slug. One of: works, profile-os, interface-sketches, field-notes, component-lab, studio-prints"
+              "description": "Project slug. One of: stephenson-brothers, works, business-web-builds, ecommerce-operations, digital-marketing-practice, it-support-systems, ml-data-studies, profile-os"
             }
           },
           "required": [
