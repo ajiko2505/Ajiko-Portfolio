@@ -17,6 +17,7 @@ import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 import { Route as SiteWorkRouteImport } from './routes/_site.work'
 import { Route as SiteServicesRouteImport } from './routes/_site.services'
+import { Route as SiteExperienceRouteImport } from './routes/_site.experience'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
 import { Route as SiteAboutRouteImport } from './routes/_site.about'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -63,6 +64,11 @@ const SiteServicesRoute = SiteServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteExperienceRoute = SiteExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteContactRoute = SiteContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
+  '/experience': typeof SiteExperienceRoute
   '/services': typeof SiteServicesRoute
   '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
+  '/experience': typeof SiteExperienceRoute
   '/services': typeof SiteServicesRoute
   '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_site/about': typeof SiteAboutRoute
   '/_site/contact': typeof SiteContactRoute
+  '/_site/experience': typeof SiteExperienceRoute
   '/_site/services': typeof SiteServicesRoute
   '/_site/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/about'
     | '/contact'
+    | '/experience'
     | '/services'
     | '/work'
     | '/work/$slug'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/about'
     | '/contact'
+    | '/experience'
     | '/services'
     | '/work'
     | '/work/$slug'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/_site/about'
     | '/_site/contact'
+    | '/_site/experience'
     | '/_site/services'
     | '/_site/work'
     | '/work/$slug'
@@ -263,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteServicesRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/experience': {
+      id: '/_site/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof SiteExperienceRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/contact': {
       id: '/_site/contact'
       path: '/contact'
@@ -311,6 +330,7 @@ declare module '@tanstack/react-router' {
 interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteContactRoute: typeof SiteContactRoute
+  SiteExperienceRoute: typeof SiteExperienceRoute
   SiteServicesRoute: typeof SiteServicesRoute
   SiteWorkRoute: typeof SiteWorkRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -319,6 +339,7 @@ interface SiteRouteChildren {
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteContactRoute: SiteContactRoute,
+  SiteExperienceRoute: SiteExperienceRoute,
   SiteServicesRoute: SiteServicesRoute,
   SiteWorkRoute: SiteWorkRoute,
   SiteIndexRoute: SiteIndexRoute,
