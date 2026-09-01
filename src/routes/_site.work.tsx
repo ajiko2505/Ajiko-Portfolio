@@ -83,7 +83,7 @@ function WorkIndex() {
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {visible.map((p, i) => (
               <li key={p.slug} className="h-full">
-                <article className="group h-full rounded-3xl border border-border bg-card/50 p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:border-mint/60 hover:shadow-soft">
+                <article className="group relative h-full rounded-3xl border border-border bg-card/50 p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:border-mint/60 hover:shadow-soft">
                   <div className="flex items-start justify-between gap-4">
                     <span className="text-mono text-muted-foreground">
                       {String(i + 1).padStart(2, "0")} · {p.category}

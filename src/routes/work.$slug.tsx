@@ -197,16 +197,35 @@ function CaseStudy() {
               </ul>
             </Block>
 
-            <div className="pt-8">
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-3 text-mono px-6 py-3 rounded-full bg-mint text-accent-foreground hover:shadow-mint transition"
-                onClick={() => trackEvent("case_study_visit", { slug })}
+            <div className="pt-8 flex flex-wrap gap-3">
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-3 text-mono px-6 py-3 rounded-full bg-mint text-accent-foreground hover:shadow-mint transition min-h-11"
+                  onClick={() => trackEvent("case_study_visit", { slug })}
+                >
+                  Visit live project →
+                </a>
+              )}
+              {project.links?.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-3 text-mono px-6 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11"
+                >
+                  {l.label} ↗
+                </a>
+              ))}
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-3 text-mono px-6 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11"
               >
-                Visit live project →
-              </a>
+                Discuss a similar project →
+              </Link>
             </div>
           </div>
         </div>
@@ -233,7 +252,7 @@ function CaseStudy() {
 
       <footer className="border-t border-border px-6 py-8">
         <div className="mx-auto max-w-[1400px] text-mono text-muted-foreground text-center">
-          © 2026 Ajiko Fidelis · Design · Code · Build
+          © 2026 Ajiko Fidelis. All rights reserved.
         </div>
       </footer>
     </div>

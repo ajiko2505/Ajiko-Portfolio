@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ajiko.lovable.app/sitemap.xml
+Sitemap: https://ajiko-portfolio.vercel.app/sitemap.xml
