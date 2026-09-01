@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
 const schema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80, "Keep it under 80 characters"),
   email: z.string().trim().email("Enter a valid email").max(160),
-  topic: z.enum(["project", "collab", "advice", "other"]),
+  topic: z.enum(["project", "marketing", "collab", "advice", "other"]),
   budget: z.enum(["<2k", "2-5k", "5-15k", "15k+", "unsure"]),
   message: z.string().trim().min(10, "Tell me a bit more").max(1000, "Keep it under 1000 characters"),
 });
@@ -15,11 +15,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const WHATSAPP = "2348155866150";
-const EMAIL_FALLBACK = "hello@ajiko.dev";
+const LINKEDIN = "https://www.linkedin.com/in/ajiko001";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
-  const [copied, setCopied] = useState(false);
   const statusId = useId();
   const {
     register,
@@ -51,17 +50,6 @@ export function ContactForm() {
     reset({ ...values, message: "" });
   });
 
-  async function copyEmail() {
-    try {
-      await navigator.clipboard.writeText(EMAIL_FALLBACK);
-      setCopied(true);
-      trackEvent("email_copy");
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      /* clipboard may be blocked; ignore */
-    }
-  }
-
   if (sent) {
     return (
       <div
@@ -82,13 +70,14 @@ export function ContactForm() {
           >
             Send another →
           </button>
-          <button
-            type="button"
-            onClick={copyEmail}
-            className="text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11"
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noreferrer"
+            className="text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11 inline-flex items-center"
           >
-            {copied ? "Email copied ✓" : `Or email · ${EMAIL_FALLBACK}`}
-          </button>
+            Connect on LinkedIn ↗
+          </a>
         </div>
       </div>
     );
@@ -141,8 +130,9 @@ export function ContactForm() {
         <Field label="What's this about?" error={errors.topic?.message} name="topic">
           <select {...register("topic")} id="topic" className="input">
             <option value="project">A new project</option>
-            <option value="collab">Collaboration</option>
-            <option value="advice">Design review / advice</option>
+            <option value="marketing">Digital marketing / SEO</option>
+            <option value="collab">Website or e-commerce work</option>
+            <option value="advice">Technical support / advice</option>
             <option value="other">Something else</option>
           </select>
         </Field>
@@ -163,7 +153,7 @@ export function ContactForm() {
           id="message"
           rows={5}
           maxLength={1000}
-          placeholder="Tell me about the thing you're building, when you need it, and how you found me."
+          placeholder="Tell me what you need, your timeline, and any technical details that help."
           className="input resize-y min-h-32"
           aria-invalid={!!errors.message}
           aria-describedby={`message-count ${errors.message ? "message-error" : ""}`.trim()}
@@ -175,14 +165,7 @@ export function ContactForm() {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-mono text-muted-foreground">
-          Sends via WhatsApp · No data stored ·{" "}
-          <button
-            type="button"
-            onClick={copyEmail}
-            className="underline underline-offset-4 hover:text-mint transition"
-          >
-            {copied ? "email copied ✓" : "copy email"}
-          </button>
+          Sends via WhatsApp · No data stored
         </p>
         <button
           type="submit"

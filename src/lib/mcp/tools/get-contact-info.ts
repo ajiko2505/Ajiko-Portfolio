@@ -1,19 +1,19 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 
-const SITE_URL = "https://ajiko.lovable.app";
+const SITE_URL = "https://ajiko-portfolio.vercel.app";
 
 const profile = {
   name: "Ajiko Fidelis",
-  role: "Designer & Developer",
-  studio: "Ajiko Fidelis Studio",
+  role: "IT Specialist, Software Developer & Digital Marketer",
+  studio: "Independent practice",
   summary:
-    "Independent design & engineering practice. Building on the web, from Nigeria — for the world. I design, I code, I build.",
+    "IT Specialist and Software Developer building websites, e-commerce solutions, digital systems and technology-driven business solutions.",
   siteUrl: SITE_URL,
   contactPageUrl: `${SITE_URL}/contact`,
   channels: {
     whatsapp: "https://wa.me/2348155866150",
-    linkedin: "https://linkedin.com/in/ajiko001",
-    instagram: "https://instagram.com/fidelis.ajiko",
+    linkedin: "https://www.linkedin.com/in/ajiko001",
+    instagram: "https://instagram.com/fidelisajiko",
     github: "https://github.com/ajiko2505",
   },
 };
