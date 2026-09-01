@@ -2,7 +2,7 @@ import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import { projects } from "@/lib/projects";
 
-const SITE_URL = "https://ajiko.lovable.app";
+const SITE_URL = "https://ajiko-portfolio.vercel.app";
 
 export default defineTool({
   name: "list_projects",
