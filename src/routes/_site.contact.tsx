@@ -5,7 +5,7 @@ import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 
 const TITLE = "Contact — Ajiko Fidelis";
 const DESC =
-  "Get in touch with Ajiko Fidelis — WhatsApp, LinkedIn, Instagram, or the contact form. Fastest reply within one working day.";
+  "Have a project in mind? Contact Ajiko Fidelis about websites, e-commerce, technical support, digital strategy or custom software — WhatsApp, LinkedIn or the contact form.";
 
 export const Route = createFileRoute("/_site/contact")({
   component: ContactPage,
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/_site/contact")({
 
 const channels = [
   ["Chat", "WhatsApp", "+234 815 586 6150", "https://wa.me/2348155866150"],
-  ["Network", "LinkedIn", "in/ajiko001", "https://linkedin.com/in/ajiko001"],
-  ["Follow", "Instagram", "@fidelis.ajiko", "https://instagram.com/fidelis.ajiko"],
+  ["Network", "LinkedIn", "in/ajiko001", "https://www.linkedin.com/in/ajiko001"],
+  ["Follow", "Instagram", "@fidelisajiko", "https://instagram.com/fidelisajiko"],
   ["Code", "GitHub", "@ajiko2505", "https://github.com/ajiko2505"],
 ] as const;
 
@@ -41,20 +41,16 @@ function ContactPage() {
       <div className="absolute inset-0 bg-aurora opacity-70 pointer-events-none" aria-hidden />
       <div className="relative mx-auto max-w-[1400px]">
         <div className="text-mono text-mint mb-4">◆ Contact</div>
-        <h1 className="text-display text-[clamp(3rem,12vw,12rem)] leading-[0.85]">
-          LET'S
-          <br />
-          <span style={{ WebkitTextStroke: "1.5px oklch(0.82 0.17 170)", color: "transparent" }}>
-            BUILD
-          </span>{" "}
-          <span className="text-mint" aria-hidden>✽</span>
+        <h1 className="text-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] max-w-4xl">
+          Have a project in mind<span className="text-mint">?</span>
         </h1>
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-5 space-y-6">
             <p className="text-lg text-foreground/80 max-w-md">
-              Tell me about the thing you're building. I read every message and
-              usually reply within a working day.
+              Whether you need a website, e-commerce solution, technical
+              support, digital strategy, or a custom software solution, let's
+              talk. I read every message and usually reply within a working day.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
