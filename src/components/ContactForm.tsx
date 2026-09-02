@@ -126,6 +126,20 @@ export function ContactForm() {
           : ""}
       </div>
 
+      {sendError && (
+        <div
+          role="alert"
+          className="rounded-2xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
+        >
+          {sendError}{" "}
+          {lastValues && (
+            <a href={whatsappUrl(lastValues)} target="_blank" rel="noreferrer" className="underline">
+              Open WhatsApp ↗
+            </a>
+          )}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Field label="Your name" error={errors.name?.message} name="name">
           <input
