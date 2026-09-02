@@ -84,12 +84,23 @@ function WorkIndex() {
             {visible.map((p, i) => (
               <li key={p.slug} className="h-full">
                 <article className="group relative h-full rounded-3xl border border-border bg-card/50 p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:border-mint/60 hover:shadow-soft">
+                  <div className="-mx-7 -mt-7 mb-6 overflow-hidden rounded-t-3xl border-b border-border">
+                    <img
+                      src={p.image}
+                      alt={`${p.title} — ${p.tag}`}
+                      loading="lazy"
+                      width={1280}
+                      height={800}
+                      className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   <div className="flex items-start justify-between gap-4">
                     <span className="text-mono text-muted-foreground">
                       {String(i + 1).padStart(2, "0")} · {p.category}
                     </span>
                     <span className="text-mono text-muted-foreground">{p.year}</span>
                   </div>
+
 
                   <div className="mt-10">
                     <h3 className="text-display text-2xl md:text-3xl">

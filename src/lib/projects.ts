@@ -1,3 +1,12 @@
+import imgStephensonBrothers from "@/assets/project-stephenson-brothers.jpg";
+import imgWorks from "@/assets/project-works.jpg";
+import imgBusinessWebBuilds from "@/assets/project-business-web-builds.jpg";
+import imgEcommerceOperations from "@/assets/project-ecommerce-operations.jpg";
+import imgDigitalMarketingPractice from "@/assets/project-digital-marketing-practice.jpg";
+import imgItSupportSystems from "@/assets/project-it-support-systems.jpg";
+import imgMlDataStudies from "@/assets/project-ml-data-studies.jpg";
+import imgProfileOs from "@/assets/project-profile-os.jpg";
+
 export const CATEGORIES = [
   "All",
   "Development",
@@ -24,6 +33,8 @@ export type Project = {
   href?: string;
   /** Extra buttons (GitHub, live demo, etc). Only real URLs. */
   links?: ProjectLink[];
+  /** Cover image shown on the work grid and case study page. */
+  image: string;
   tone: "mint" | "mint-soft" | "forest" | "dark";
   size: "tall" | "short" | "wide";
   featured?: boolean;
@@ -39,6 +50,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "stephenson-brothers",
+    image: imgStephensonBrothers,
     title: "Stephenson Brothers Ltd",
     tag: "Digital Transformation & E-Commerce",
     category: "E-Commerce",
@@ -73,6 +85,7 @@ export const projects: Project[] = [
   },
   {
     slug: "works",
+    image: imgWorks,
     title: "Works",
     tag: "Open Source",
     category: "Development",
@@ -106,6 +119,7 @@ export const projects: Project[] = [
   },
   {
     slug: "business-web-builds",
+    image: imgBusinessWebBuilds,
     title: "Business Website Builds",
     tag: "Web Development",
     category: "Web",
@@ -135,6 +149,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ecommerce-operations",
+    image: imgEcommerceOperations,
     title: "E-Commerce Operations",
     tag: "E-Commerce",
     category: "E-Commerce",
@@ -163,6 +178,7 @@ export const projects: Project[] = [
   },
   {
     slug: "digital-marketing-practice",
+    image: imgDigitalMarketingPractice,
     title: "Digital Marketing & SEO",
     tag: "Marketing",
     category: "Marketing",
@@ -191,6 +207,7 @@ export const projects: Project[] = [
   },
   {
     slug: "it-support-systems",
+    image: imgItSupportSystems,
     title: "IT Support & Systems",
     tag: "IT",
     category: "IT",
@@ -219,6 +236,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ml-data-studies",
+    image: imgMlDataStudies,
     title: "Machine Learning & Data Studies",
     tag: "AI / Data",
     category: "AI / Data",
@@ -248,6 +266,7 @@ export const projects: Project[] = [
   },
   {
     slug: "profile-os",
+    image: imgProfileOs,
     title: "Profile OS",
     tag: "Identity",
     category: "Development",

@@ -2,7 +2,10 @@ import { useState, useId } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
 import { trackEvent } from "@/lib/analytics";
+import { submitContactMessage } from "@/lib/contact.functions";
+
 
 const schema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80, "Keep it under 80 characters"),
@@ -19,7 +22,10 @@ const LINKEDIN = "https://www.linkedin.com/in/ajiko001";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [lastValues, setLastValues] = useState<FormValues | null>(null);
   const statusId = useId();
+  const send = useServerFn(submitContactMessage);
   const {
     register,
     handleSubmit,
@@ -35,19 +41,30 @@ export function ContactForm() {
   const messageLen = (watch("message") ?? "").length;
   const errorCount = Object.keys(errors).length;
 
-  const onSubmit = handleSubmit(async (values) => {
-    const body = [
-      `New enquiry from ${values.name} (${values.email})`,
-      `Topic: ${values.topic}  ·  Budget: ${values.budget}`,
-      "",
-      values.message,
-    ].join("\n");
+  const whatsappUrl = (values: FormValues) =>
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+      [
+        `New enquiry from ${values.name} (${values.email})`,
+        `Topic: ${values.topic}  ·  Budget: ${values.budget}`,
+        "",
+        values.message,
+      ].join("\n"),
+    )}`;
 
-    const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(body)}`;
+  const onSubmit = handleSubmit(async (values) => {
+    setSendError(null);
     trackEvent("contact_submit", { topic: values.topic, budget: values.budget });
-    if (typeof window !== "undefined") window.open(url, "_blank", "noopener,noreferrer");
-    setSent(true);
-    reset({ ...values, message: "" });
+    try {
+      await send({ data: values });
+      setLastValues(values);
+      setSent(true);
+      reset({ ...values, message: "" });
+    } catch {
+      setSendError(
+        "Something went wrong sending that. Try again, or send it straight to me on WhatsApp.",
+      );
+      setLastValues(values);
+    }
   });
 
   if (sent) {
@@ -57,10 +74,11 @@ export function ContactForm() {
         role="status"
         aria-live="polite"
       >
-        <div className="text-mono text-mint mb-4">◆ Message queued</div>
+        <div className="text-mono text-mint mb-4">◆ Message received</div>
         <h3 className="text-display text-4xl mb-3">Talk soon.</h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          I opened a WhatsApp window with your note — hit send there and I'll reply within one working day.
+          Your enquiry has landed in my inbox. I reply within one working day — if it's urgent,
+          WhatsApp is faster.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
@@ -70,6 +88,16 @@ export function ContactForm() {
           >
             Send another →
           </button>
+          {lastValues && (
+            <a
+              href={whatsappUrl(lastValues)}
+              target="_blank"
+              rel="noreferrer"
+              className="text-mono px-5 py-3 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11 inline-flex items-center"
+            >
+              Also send on WhatsApp ↗
+            </a>
+          )}
           <a
             href={LINKEDIN}
             target="_blank"
@@ -82,6 +110,7 @@ export function ContactForm() {
       </div>
     );
   }
+
 
   return (
     <form
@@ -96,6 +125,20 @@ export function ContactForm() {
           ? `${errorCount} field${errorCount === 1 ? "" : "s"} need attention.`
           : ""}
       </div>
+
+      {sendError && (
+        <div
+          role="alert"
+          className="rounded-2xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
+        >
+          {sendError}{" "}
+          {lastValues && (
+            <a href={whatsappUrl(lastValues)} target="_blank" rel="noreferrer" className="underline">
+              Open WhatsApp ↗
+            </a>
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Field label="Your name" error={errors.name?.message} name="name">
@@ -165,7 +208,7 @@ export function ContactForm() {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-mono text-muted-foreground">
-          Sends via WhatsApp · No data stored
+          Sent straight to my inbox · WhatsApp backup available
         </p>
         <button
           type="submit"

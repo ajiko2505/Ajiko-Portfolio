@@ -137,14 +137,20 @@ function CaseStudy() {
       {/* COVER */}
       <section className="px-6">
         <div className="mx-auto max-w-[1400px]">
-          <div className="relative aspect-[16/8] rounded-3xl bg-mint-gradient noise overflow-hidden grid place-items-center">
-            <span className="text-display text-[clamp(4rem,20vw,20rem)] text-accent-foreground/90 leading-none">
-              {project.title.charAt(0)}
-            </span>
-            <div className="absolute bottom-6 left-6 text-mono text-accent-foreground/80">
+          <div className="relative aspect-[16/8] rounded-3xl overflow-hidden border border-border">
+            <img
+              src={project.image}
+              alt={`${project.title} — ${project.tag}`}
+              width={1280}
+              height={800}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/20 to-transparent" />
+            <div className="absolute bottom-6 left-6 text-mono text-foreground/90">
               {project.tag} · {project.year}
             </div>
           </div>
+
         </div>
       </section>
 
