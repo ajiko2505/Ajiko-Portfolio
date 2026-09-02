@@ -194,7 +194,7 @@ export function ContactForm() {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-mono text-muted-foreground">
-          Sends via WhatsApp · No data stored
+          Sent straight to my inbox · WhatsApp backup available
         </p>
         <button
           type="submit"
