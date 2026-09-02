@@ -2,7 +2,10 @@ import { useState, useId } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
 import { trackEvent } from "@/lib/analytics";
+import { submitContactMessage } from "@/lib/contact.functions";
+
 
 const schema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80, "Keep it under 80 characters"),
