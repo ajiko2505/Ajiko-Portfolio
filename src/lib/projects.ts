@@ -51,6 +51,7 @@ export const projects: Project[] = [
   {
     slug: "stephenson-brothers",
     image: imgStephensonBrothers,
+    links: [{ label: "GitHub", href: "https://github.com/ajiko2505/stephensonbrothersltd" }],
     title: "Stephenson Brothers Ltd",
     tag: "Digital Transformation & E-Commerce",
     category: "E-Commerce",
