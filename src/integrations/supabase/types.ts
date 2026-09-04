@@ -19,6 +19,7 @@ export type Database = {
           budget: string
           created_at: string
           delivered_email: boolean
+          delivery_error: string | null
           email: string
           id: string
           message: string
@@ -29,6 +30,7 @@ export type Database = {
           budget: string
           created_at?: string
           delivered_email?: boolean
+          delivery_error?: string | null
           email: string
           id?: string
           message: string
@@ -39,6 +41,7 @@ export type Database = {
           budget?: string
           created_at?: string
           delivered_email?: boolean
+          delivery_error?: string | null
           email?: string
           id?: string
           message?: string

@@ -15,6 +15,13 @@
       "when": 1788515504555,
       "tag": "0001_restrict_contact_messages_to_admins",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788515548380,
+      "tag": "0002_add_contact_delivery_error",
+      "breakpoints": true
     }
   ]
 }
