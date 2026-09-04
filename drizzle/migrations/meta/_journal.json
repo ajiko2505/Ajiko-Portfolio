@@ -8,6 +8,13 @@
       "when": 1788354340799,
       "tag": "0000_create_contact_messages",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788515504555,
+      "tag": "0001_restrict_contact_messages_to_admins",
+      "breakpoints": true
     }
   ]
 }
