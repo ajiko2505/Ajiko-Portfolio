@@ -38,13 +38,31 @@ export const submitContactMessage = createServerFn({ method: "POST" })
       throw new Error("Could not save your message. Please try WhatsApp instead.");
     }
 
+    const requestId = row.id as string;
+    const log = (level: "info" | "warn" | "error", msg: string, extra?: unknown) => {
+      const line = `[contact:${requestId}] ${msg}`;
+      if (level === "error") console.error(line, extra ?? "");
+      else if (level === "warn") console.warn(line, extra ?? "");
+      else console.info(line, extra ?? "");
+    };
+
     let emailed = false;
+    let emailError: string | null = null;
     const lovableKey = process.env["LOVABLE_API_KEY"];
     const resendKey = process.env["RESEND_API_KEY"];
     const notify = process.env["CONTACT_NOTIFY_EMAIL"];
     const from = process.env["CONTACT_FROM_EMAIL"] ?? "Portfolio <onboarding@resend.dev>";
 
-    if (lovableKey && resendKey && notify) {
+    const missing = [
+      !lovableKey && "LOVABLE_API_KEY",
+      !resendKey && "RESEND_API_KEY",
+      !notify && "CONTACT_NOTIFY_EMAIL",
+    ].filter(Boolean) as string[];
+
+    if (missing.length > 0) {
+      emailError = `email delivery skipped: missing env ${missing.join(", ")}`;
+      log("warn", emailError);
+    } else {
       const html = `
         <h2>New portfolio enquiry</h2>
         <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
@@ -54,33 +72,69 @@ export const submitContactMessage = createServerFn({ method: "POST" })
         <p style="white-space:pre-wrap">${escapeHtml(data.message)}</p>
       `;
 
-      const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${lovableKey}`,
-          "X-Connection-Api-Key": resendKey,
-        },
-        body: JSON.stringify({
-          from,
-          to: [notify],
-          reply_to: data.email,
-          subject: `Portfolio enquiry — ${data.name} (${data.topic})`,
-          html,
-        }),
+      const payload = JSON.stringify({
+        from,
+        to: [notify],
+        reply_to: data.email,
+        subject: `Portfolio enquiry — ${data.name} (${data.topic})`,
+        html,
       });
 
-      if (!response.ok) {
-        const body = await response.text();
-        console.error(`Resend request failed [${response.status}]: ${body}`);
-      } else {
-        emailed = true;
-        await supabaseAdmin
-          .from("contact_messages")
-          .update({ delivered_email: true })
-          .eq("id", row.id);
+      const maxAttempts = 3;
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        const startedAt = Date.now();
+        try {
+          const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${lovableKey}`,
+              "X-Connection-Api-Key": resendKey!,
+            },
+            body: payload,
+          });
+
+          const durationMs = Date.now() - startedAt;
+
+          if (response.ok) {
+            emailed = true;
+            emailError = null;
+            log("info", `email delivered on attempt ${attempt} in ${durationMs}ms`);
+            break;
+          }
+
+          const body = await response.text();
+          emailError = `Resend request failed [${response.status}] on attempt ${attempt}/${maxAttempts}: ${body}`;
+          log("error", emailError);
+
+          // 4xx (other than rate limiting) will not succeed on retry.
+          if (response.status < 500 && response.status !== 429) break;
+        } catch (err) {
+          emailError = `Resend request threw on attempt ${attempt}/${maxAttempts}: ${
+            err instanceof Error ? err.message : String(err)
+          }`;
+          log("error", emailError);
+        }
+
+        if (attempt < maxAttempts) {
+          await new Promise((resolve) => setTimeout(resolve, 400 * attempt));
+        }
       }
     }
 
-    return { id: row.id, emailed };
+    const { error: updateError } = await supabaseAdmin
+      .from("contact_messages")
+      .update({ delivered_email: emailed, delivery_error: emailError })
+      .eq("id", requestId);
+
+    if (updateError) {
+      log("error", `failed to record delivery status: ${updateError.message}`);
+    }
+
+    if (!emailed) {
+      log("warn", "message stored but not emailed; follow up manually");
+    }
+
+    return { id: requestId, emailed };
   });
+
