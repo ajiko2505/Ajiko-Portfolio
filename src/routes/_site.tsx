@@ -214,6 +214,7 @@ function SiteLayout() {
             <h2 className="text-mono text-muted-foreground mb-3 normal-case tracking-[0.15em]">Elsewhere</h2>
             <ul className="space-y-2 text-sm">
               <li><a href={social.github} target="_blank" rel="noreferrer" className="hover:text-mint transition">GitHub</a></li>
+              <li><Link to="/linkedin" className="hover:text-mint transition">LinkedIn profile</Link></li>
               <li><a href={social.linkedin} target="_blank" rel="noreferrer" className="hover:text-mint transition">LinkedIn</a></li>
               <li><a href={social.instagram} target="_blank" rel="noreferrer" className="hover:text-mint transition">Instagram</a></li>
               <li><a href={social.whatsapp} target="_blank" rel="noreferrer" className="hover:text-mint transition">WhatsApp</a></li>
