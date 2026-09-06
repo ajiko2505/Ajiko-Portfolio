@@ -17,6 +17,7 @@ import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 import { Route as SiteWorkRouteImport } from './routes/_site.work'
 import { Route as SiteServicesRouteImport } from './routes/_site.services'
+import { Route as SiteLinkedinRouteImport } from './routes/_site.linkedin'
 import { Route as SiteExperienceRouteImport } from './routes/_site.experience'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
 import { Route as SiteAboutRouteImport } from './routes/_site.about'
@@ -62,6 +63,11 @@ const SiteWorkRoute = SiteWorkRouteImport.update({
 const SiteServicesRoute = SiteServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteLinkedinRoute = SiteLinkedinRouteImport.update({
+  id: '/linkedin',
+  path: '/linkedin',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteExperienceRoute = SiteExperienceRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
   '/experience': typeof SiteExperienceRoute
+  '/linkedin': typeof SiteLinkedinRoute
   '/services': typeof SiteServicesRoute
   '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
   '/experience': typeof SiteExperienceRoute
+  '/linkedin': typeof SiteLinkedinRoute
   '/services': typeof SiteServicesRoute
   '/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/_site/about': typeof SiteAboutRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/experience': typeof SiteExperienceRoute
+  '/_site/linkedin': typeof SiteLinkedinRoute
   '/_site/services': typeof SiteServicesRoute
   '/_site/work': typeof SiteWorkRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
+    | '/linkedin'
     | '/services'
     | '/work'
     | '/work/$slug'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
+    | '/linkedin'
     | '/services'
     | '/work'
     | '/work/$slug'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/_site/about'
     | '/_site/contact'
     | '/_site/experience'
+    | '/_site/linkedin'
     | '/_site/services'
     | '/_site/work'
     | '/work/$slug'
@@ -275,6 +287,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteServicesRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/linkedin': {
+      id: '/_site/linkedin'
+      path: '/linkedin'
+      fullPath: '/linkedin'
+      preLoaderRoute: typeof SiteLinkedinRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/experience': {
       id: '/_site/experience'
       path: '/experience'
@@ -331,6 +350,7 @@ interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteContactRoute: typeof SiteContactRoute
   SiteExperienceRoute: typeof SiteExperienceRoute
+  SiteLinkedinRoute: typeof SiteLinkedinRoute
   SiteServicesRoute: typeof SiteServicesRoute
   SiteWorkRoute: typeof SiteWorkRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -340,6 +360,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteContactRoute: SiteContactRoute,
   SiteExperienceRoute: SiteExperienceRoute,
+  SiteLinkedinRoute: SiteLinkedinRoute,
   SiteServicesRoute: SiteServicesRoute,
   SiteWorkRoute: SiteWorkRoute,
   SiteIndexRoute: SiteIndexRoute,
