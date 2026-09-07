@@ -10,6 +10,7 @@ const profile = {
     "IT Specialist and Software Developer building websites, e-commerce solutions, digital systems and technology-driven business solutions.",
   siteUrl: SITE_URL,
   contactPageUrl: `${SITE_URL}/contact`,
+  email: "ajikofidelis.3@gmail.com",
   channels: {
     whatsapp: "https://wa.me/2348155866150",
     linkedin: "https://www.linkedin.com/in/ajiko001",
