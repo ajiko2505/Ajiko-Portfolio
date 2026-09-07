@@ -29,6 +29,7 @@ export const Route = createFileRoute("/_site/contact")({
 });
 
 const channels = [
+  ["Email", "Gmail", "ajikofidelis.3@gmail.com", "mailto:ajikofidelis.3@gmail.com"],
   ["Chat", "WhatsApp", "+234 815 586 6150", "https://wa.me/2348155866150"],
   ["Network", "LinkedIn", "in/ajiko001", "https://www.linkedin.com/in/ajiko001"],
   ["Follow", "Instagram", "@fidelisajiko", "https://instagram.com/fidelisajiko"],

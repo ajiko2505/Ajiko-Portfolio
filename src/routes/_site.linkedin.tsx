@@ -3,6 +3,7 @@ import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 import {
   profile,
   social,
+  email,
   skillGroups,
   experience,
   education,
@@ -55,11 +56,18 @@ function LinkedInPage() {
 
           <div className="mt-9 flex flex-wrap gap-3">
             <a
+              href={social.email}
+              onClick={() => trackEvent("email_click", { from: "profile_page" })}
+              className="text-mono px-7 py-3.5 rounded-full bg-mint text-accent-foreground hover:shadow-mint transition min-h-11 inline-flex items-center"
+            >
+              Email me ↗
+            </a>
+            <a
               href={social.linkedin}
               target="_blank"
               rel="noreferrer"
               onClick={() => trackEvent("linkedin_open", { from: "profile_page" })}
-              className="text-mono px-7 py-3.5 rounded-full bg-mint text-accent-foreground hover:shadow-mint transition min-h-11 inline-flex items-center"
+              className="text-mono px-7 py-3.5 rounded-full border border-border hover:border-mint hover:text-mint transition min-h-11 inline-flex items-center"
             >
               Connect on LinkedIn ↗
             </a>

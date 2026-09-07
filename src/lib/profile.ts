@@ -12,11 +12,14 @@ export const profile = {
   cvPath: "/Ajiko-Fidelis-CV.pdf",
 };
 
+export const email = "ajikofidelis.3@gmail.com";
+
 export const social = {
   github: "https://github.com/ajiko2505",
   linkedin: "https://www.linkedin.com/in/ajiko001",
   instagram: "https://instagram.com/fidelisajiko",
   whatsapp: "https://wa.me/2348155866150",
+  email: `mailto:${email}`,
 } as const;
 
 export type SkillGroup = { title: string; note: string; items: string[] };
