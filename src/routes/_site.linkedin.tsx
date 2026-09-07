@@ -3,6 +3,7 @@ import { SITE_URL, SITE_OG_IMAGE } from "@/lib/seo";
 import {
   profile,
   social,
+  email,
   skillGroups,
   experience,
   education,
